@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prise de RDV Orientation - Lycée Saint-Victor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        input[type="text"]:disabled,
+        select:disabled {
+            background-color: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .error-message {
+            display: none;
+            background-color: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border-left: 4px solid #c33;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .error-message ul {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+
+        .error-message li {
+            margin-bottom: 3px;
+        }
+
+        .success-message {
+            display: none;
+            background-color: #efe;
+            color: #3c3;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border-left: 4px solid #3c3;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .info-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .redirecting {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .redirecting h2 {
+            color: #333;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .redirecting p {
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="formContainer">
+            <h1>RDV Orientation</h1>
+            <p class="subtitle">Prenez rendez-vous avec la direction pour votre orientation</p>
+
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <form id="rdvForm">
+                <div class="form-group">
+                    <label for="nom">Nom et Prénom *</label>
+                    <input type="text" id="nom" name="nom" required placeholder="Ex: Jean Dupont">
+                </div>
+
+                <div class="form-group">
+                    <label for="classe">Classe *</label>
+                    <select id="classe" name="classe" required>
+                        <option value="">-- Sélectionnez votre classe --</option>
+                        <option value="2A">2A</option>
+                        <option value="2B">2B</option>
+                        <option value="2C">2C</option>
+                        <option value="2D">2D</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pp">Professeur Principal</label>
+                    <input type="text" id="pp" name="pp" disabled placeholder="Sera rempli automatiquement">
+                </div>
+
+                <div class="form-group">
+                    <label>Avez-vous rencontré votre professeur principal ? *</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="vuPP" name="vuPP">
+                        <label for="vuPP">Oui, j'ai rencontré mon professeur principal</label>
+                    </div>
+                    <div style="font-size: 12px; color: #c33; margin-top: 5px;" id="ppWarning" style="display: none;">
+                        ⚠️ Veuillez d'abord rencontrer votre professeur principal avant de prendre RDV.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="motivation">Motif de votre demande *</label>
+                    <textarea id="motivation" name="motivation" required placeholder="Expliquez brièvement le motif de votre demande d'orientation..."></textarea>
+                </div>
+
+                <div class="info-box">
+                    <strong>ℹ️ Important :</strong> Vous ne pouvez réserver un RDV que si vous avez déjà rencontré votre professeur principal. Si ce n'est pas le cas, contactez-le d'abord.
+                </div>
+
+                <button type="submit">Prendre RDV</button>
+            </form>
+        </div>
+
+        <div class="redirecting" id="redirecting">
+            <div class="spinner"></div>
+            <h2>RDV enregistré !</h2>
+            <p>Redirection vers le calendrier de réservation...</p>
+        </div>
+    </div>
+
+    <script>
+        const ppAssignments = {
+            '2A': 'Mme Delplace',
+            '2B': 'Mme Engelmann',
+            '2C': 'Mme Aunet',
+            '2D': 'Mme Conti'
+        };
+
+        const classeSelect = document.getElementById('classe');
+        const ppInput = document.getElementById('pp');
+        const vuPPCheckbox = document.getElementById('vuPP');
+        const ppWarning = document.getElementById('ppWarning');
+        const form = document.getElementById('rdvForm');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        const formContainer = document.getElementById('formContainer');
+        const redirectingContainer = document.getElementById('redirecting');
+
+        // Auto-fill PP based on class
+        classeSelect.addEventListener('change', function() {
+            if (this.value && ppAssignments[this.value]) {
+                ppInput.value = ppAssignments[this.value];
+            } else {
+                ppInput.value = '';
+            }
+        });
+
+        // Show warning if PP not seen
+        vuPPCheckbox.addEventListener('change', function() {
+            if (!this.checked) {
+                ppWarning.style.display = 'block';
+            } else {
+                ppWarning.style.display = 'none';
+            }
+        });
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Reset error message
+            errorMessage.classList.remove('show');
+            errorMessage.innerHTML = '';
+
+            // Validation
+            const errors = [];
+
+            const nom = document.getElementById('nom').value.trim();
+            const classe = document.getElementById('classe').value;
+            const motivation = document.getElementById('motivation').value.trim();
+            const vuPP = document.getElementById('vuPP').checked;
+
+            if (!nom) errors.push('Le nom et prénom sont obligatoires');
+            if (!classe) errors.push('La classe est obligatoire');
+            if (!motivation) errors.push('Le motif est obligatoire');
+            if (!vuPP) errors.push('Vous devez avoir rencontré votre professeur principal');
+
+            if (errors.length > 0) {
+                errorMessage.innerHTML = '<strong>Erreur :</strong><ul>' +
+                    errors.map(e => '<li>' + e + '</li>').join('') +
+                    '</ul>';
+                errorMessage.classList.add('show');
+                return;
+            }
+
+            // Save to localStorage (for you to check later)
+            const submission = {
+                nom: nom,
+                classe: classe,
+                pp: ppInput.value,
+                motivation: motivation,
+                timestamp: new Date().toLocaleString('fr-FR')
+            };
+
+            let submissions = JSON.parse(localStorage.getItem('rdvSubmissions') || '[]');
+            submissions.push(submission);
+            localStorage.setItem('rdvSubmissions', JSON.stringify(submissions));
+
+            // Send email via Formspree (optional - configure your email endpoint here)
+            fetch("https://formspree.io/f/xbgjknad", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nom: nom,
+                    classe: classe,
+                    pp: ppInput.value,
+                    motivation: motivation,
+                    timestamp: submission.timestamp
+                })
+            }).catch(err => console.log('Email service unavailable, but form saved locally'));
+
+            // Show success and redirect
+            formContainer.style.display = 'none';
+            redirectingContainer.style.display = 'block';
+
+            // Redirect to Calendly after 2 seconds
+            setTimeout(function() {
+                window.location.href = 'https://calendly.com/diradjoint-lycee-saintvictor26';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
