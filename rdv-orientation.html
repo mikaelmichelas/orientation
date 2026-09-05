@@ -384,9 +384,11 @@
             formContainer.style.display = 'none';
             redirectingContainer.style.display = 'block';
 
-            // Redirect to Calendly after 2 seconds
+            // Redirect to Calendly after 2 seconds with pre-filled data
             setTimeout(function() {
-                window.location.href = 'https://calendly.com/diradjoint-lycee-saintvictor26';
+                const calendlyUrl = 'https://calendly.com/diradjoint-lycee-saintvictor26?name=' +
+                    encodeURIComponent(nom) + '&email=' + encodeURIComponent(email);
+                window.location.href = calendlyUrl;
             }, 2000);
         });
     </script>
