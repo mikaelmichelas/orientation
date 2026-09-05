@@ -231,6 +231,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="Ex: jean.dupont@example.com">
+                </div>
+
+                <div class="form-group">
                     <label for="classe">Classe *</label>
                     <select id="classe" name="classe" required>
                         <option value="">-- Sélectionnez votre classe --</option>
@@ -325,11 +330,14 @@
             const errors = [];
 
             const nom = document.getElementById('nom').value.trim();
+            const email = document.getElementById('email').value.trim();
             const classe = document.getElementById('classe').value;
             const motivation = document.getElementById('motivation').value.trim();
             const vuPP = document.getElementById('vuPP').checked;
 
             if (!nom) errors.push('Le nom et prénom sont obligatoires');
+            if (!email) errors.push('L\'email est obligatoire');
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email) errors.push('L\'email n\'est pas valide');
             if (!classe) errors.push('La classe est obligatoire');
             if (!motivation) errors.push('Le motif est obligatoire');
             if (!vuPP) errors.push('Vous devez avoir rencontré votre professeur principal');
@@ -345,6 +353,7 @@
             // Save to localStorage (for you to check later)
             const submission = {
                 nom: nom,
+                email: email,
                 classe: classe,
                 pp: ppInput.value,
                 motivation: motivation,
@@ -363,6 +372,7 @@
                 },
                 body: JSON.stringify({
                     nom: nom,
+                    email: email,
                     classe: classe,
                     pp: ppInput.value,
                     motivation: motivation,
