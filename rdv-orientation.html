@@ -239,10 +239,33 @@
                     <label for="classe">Classe *</label>
                     <select id="classe" name="classe" required>
                         <option value="">-- Sélectionnez votre classe --</option>
+                        <option value="1A">1A</option>
+                        <option value="1B">1B</option>
+                        <option value="1C">1C</option>
+                        <option value="1D">1D</option>
                         <option value="2A">2A</option>
                         <option value="2B">2B</option>
                         <option value="2C">2C</option>
                         <option value="2D">2D</option>
+                        <option value="TA">TA</option>
+                        <option value="TB">TB</option>
+                        <option value="TC">TC</option>
+                        <option value="TD">TD</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="prGroup" style="display: none;">
+                    <label for="pr">Professeur Référent *</label>
+                    <select id="pr" name="pr">
+                        <option value="">-- Sélectionnez votre PR --</option>
+                        <option value="Mme Follin">Mme Follin</option>
+                        <option value="Mme Gaundez">Mme Gaundez</option>
+                        <option value="Mme Le Coeur">Mme Le Coeur</option>
+                        <option value="M. Lopez">M. Lopez</option>
+                        <option value="Mme Nocera">Mme Nocera</option>
+                        <option value="Mme Pirowski">Mme Pirowski</option>
+                        <option value="M. Rossille">M. Rossille</option>
+                        <option value="Mme Thromas">Mme Thromas</option>
                     </select>
                 </div>
 
@@ -284,6 +307,10 @@
 
     <script>
         const ppAssignments = {
+            '1A': 'Mme Durif',
+            '1B': 'Mme Boucher',
+            '1C': 'M. Durif',
+            '1D': 'Mme Darnaud',
             '2A': 'Mme Delplace',
             '2B': 'Mme Engelmann',
             '2C': 'Mme Aunet',
@@ -292,6 +319,8 @@
 
         const classeSelect = document.getElementById('classe');
         const ppInput = document.getElementById('pp');
+        const prSelect = document.getElementById('pr');
+        const prGroup = document.getElementById('prGroup');
         const vuPPCheckbox = document.getElementById('vuPP');
         const ppWarning = document.getElementById('ppWarning');
         const form = document.getElementById('rdvForm');
@@ -300,10 +329,30 @@
         const formContainer = document.getElementById('formContainer');
         const redirectingContainer = document.getElementById('redirecting');
 
-        // Auto-fill PP based on class
+        // Auto-fill PP based on class or show PR selector for Terminale
         classeSelect.addEventListener('change', function() {
             if (this.value && ppAssignments[this.value]) {
+                // Classes 1 et 2 : PP automatique
                 ppInput.value = ppAssignments[this.value];
+                prGroup.style.display = 'none';
+                prSelect.value = '';
+            } else if (this.value.startsWith('T')) {
+                // Terminale : affiche le select PR
+                ppInput.value = '';
+                prGroup.style.display = 'block';
+                prSelect.required = true;
+            } else {
+                ppInput.value = '';
+                prGroup.style.display = 'none';
+                prSelect.value = '';
+                prSelect.required = false;
+            }
+        });
+
+        // Update ppInput when PR is selected
+        prSelect.addEventListener('change', function() {
+            if (this.value) {
+                ppInput.value = this.value;
             } else {
                 ppInput.value = '';
             }
@@ -332,6 +381,7 @@
             const nom = document.getElementById('nom').value.trim();
             const email = document.getElementById('email').value.trim();
             const classe = document.getElementById('classe').value;
+            const pp = document.getElementById('pp').value.trim();
             const motivation = document.getElementById('motivation').value.trim();
             const vuPP = document.getElementById('vuPP').checked;
 
@@ -339,6 +389,7 @@
             if (!email) errors.push('L\'email est obligatoire');
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email) errors.push('L\'email n\'est pas valide');
             if (!classe) errors.push('La classe est obligatoire');
+            if (!pp) errors.push('Vous devez sélectionner votre professeur principal ou référent');
             if (!motivation) errors.push('Le motif est obligatoire');
             if (!vuPP) errors.push('Vous devez avoir rencontré votre professeur principal');
 
