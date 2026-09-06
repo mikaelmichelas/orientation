@@ -305,7 +305,7 @@
             </svg>
             <div class="header-text">
                 <h1>🎓 Jeudis de l'Orientation</h1>
-                <p>Lycée Saint Victor – Inscription aux présentations</p>
+                <p>Saint Victor Lycée – Inscription aux présentations</p>
             </div>
         </div>
 
@@ -431,18 +431,29 @@
 
             // Envoyer à Google Sheets via Apps Script
             try {
+                console.log('📤 Envoi des données:', data);
                 const response = await fetch('https://script.google.com/macros/s/AKfycbxEVRwM0yALvw0FvKxjqT7d70tIOR0aQSPTqR8GzyR4rGn6UGf2rNLWkiQjsvpgFyM_/exec', {
                     method: 'POST',
-                    body: JSON.stringify(data),
-                    mode: 'no-cors'
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
                 });
 
-                showMessage('✓ Inscription validée ! Merci.', 'success');
-                form.reset();
-                setTimeout(() => messageEl.style.display = 'none', 4000);
+                const result = await response.json();
+                console.log('📥 Réponse serveur:', result);
+
+                if (result.success) {
+                    showMessage('✓ Inscription validée ! Merci.', 'success');
+                    form.reset();
+                    setTimeout(() => messageEl.style.display = 'none', 4000);
+                } else {
+                    showMessage('Erreur : ' + (result.error || 'Problème serveur'), 'error');
+                    console.error('Erreur serveur:', result.error);
+                }
             } catch (error) {
-                showMessage('Erreur lors de l\'envoi. Réessayez.', 'error');
-                console.log('Données (test mode):', data);
+                showMessage('Erreur lors de l\'envoi. Vérifiez la console.', 'error');
+                console.error('❌ Erreur:', error);
             }
         });
 
