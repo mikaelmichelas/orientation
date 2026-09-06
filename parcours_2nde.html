@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Temps forts de l'orientation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f8f9fa;
+      color: #1a1a1a;
+    }
+    a { color: #c4268b; text-decoration: none; cursor: pointer; }
+    a:hover { color: #a01f6b; text-decoration: underline; }
+
+    .container {
+      width: 1400px;
+      padding: 40px;
+      background: white;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 40px;
+      border-bottom: 3px solid #f0f0f0;
+      padding-bottom: 24px;
+    }
+
+    .logo {
+      width: 100px;
+      height: auto;
+      flex-shrink: 0;
+    }
+
+    .header-title {
+      flex: 1;
+    }
+
+    .header-title h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: #003478;
+      margin-bottom: 4px;
+      letter-spacing: -0.5px;
+    }
+
+    .header-title p {
+      font-size: 14px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    /* Sélecteur mois */
+    .timeline-months {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+      justify-content: space-between;
+      padding: 0 12px;
+      flex-wrap: wrap;
+    }
+
+    .month-badge {
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+      padding: 10px 8px;
+      background: #f5f5f5;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .month-badge:hover {
+      background: #eee;
+      transform: translateY(-2px);
+    }
+
+    .month-badge.q1 { border-color: #003478; }
+    .month-badge.q2 { border-color: #00a8cc; }
+    .month-badge.q3 { border-color: #c4268b; }
+
+    .month-badge.active {
+      font-weight: 700;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .month-badge.active.q1 {
+      color: white;
+      background: #003478;
+      border-color: #003478;
+    }
+    .month-badge.active.q2 {
+      color: white;
+      background: #00a8cc;
+      border-color: #00a8cc;
+    }
+    .month-badge.active.q3 {
+      color: white;
+      background: #c4268b;
+      border-color: #c4268b;
+    }
+
+    /* Trimestres */
+    .trimester {
+      margin-bottom: 32px;
+      padding: 24px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .trimester.active {
+      display: block;
+    }
+
+    .trimester.q1 {
+      background: rgba(0, 52, 120, 0.04);
+      border-left: 4px solid #003478;
+    }
+
+    .trimester.q2 {
+      background: rgba(0, 168, 204, 0.04);
+      border-left: 4px solid #00a8cc;
+    }
+
+    .trimester.q3 {
+      background: rgba(196, 38, 139, 0.04);
+      border-left: 4px solid #c4268b;
+    }
+
+    .trimester-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .trimester.active .trimester-title {
+      display: block;
+    }
+
+    .trimester.q1 .trimester-title { color: #003478; }
+    .trimester.q2 .trimester-title { color: #00a8cc; }
+    .trimester.q3 .trimester-title { color: #c4268b; }
+
+    /* Événements */
+    .event-card {
+      border-left: 4px solid #ddd;
+      padding: 20px;
+      background: white;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      display: none;
+      flex-direction: row;
+    }
+
+    .event-card.visible {
+      display: flex;
+    }
+
+    .event-card:hover {
+      background: #fafafa;
+      transform: translateX(4px);
+    }
+
+    .event-card.q1 { border-left-color: #003478; }
+    .event-card.q2 { border-left-color: #00a8cc; }
+    .event-card.q3 { border-left-color: #c4268b; }
+
+    .event-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      margin-right: 20px;
+    }
+
+    .event-card.q1 .event-icon { background: rgba(0, 52, 120, 0.12); }
+    .event-card.q2 .event-icon { background: rgba(0, 168, 204, 0.12); }
+    .event-card.q3 .event-icon { background: rgba(196, 38, 139, 0.12); }
+
+    .event-body {
+      flex: 1;
+    }
+
+    .event-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #003478;
+      margin-bottom: 6px;
+    }
+
+    .event-period {
+      font-size: 13px;
+      color: #999;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .event-desc {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .highlight {
+      font-weight: 600;
+      color: #003478;
+    }
+
+    /* Activités continues toute l'année */
+    .continuous-activities {
+      margin: 40px 0;
+      padding: 24px;
+      background: #fafafa;
+      border-radius: 8px;
+      border-top: 3px solid #f0f0f0;
+    }
+
+    .continuous-activities-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #003478;
+      margin-bottom: 20px;
+    }
+
+    .activity-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+      padding: 12px;
+      background: white;
+      border-radius: 6px;
+    }
+
+    .activity-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .activity-bar:nth-child(2) .activity-icon { background: rgba(0, 52, 120, 0.12); }
+    .activity-bar:nth-child(3) .activity-icon { background: rgba(0, 168, 204, 0.12); }
+    .activity-bar:nth-child(4) .activity-icon { background: rgba(196, 38, 139, 0.12); }
+    .activity-bar:nth-child(5) .activity-icon { background: rgba(0, 168, 204, 0.12); }
+
+    .activity-bar-content {
+      flex: 1;
+    }
+
+    .activity-bar-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #003478;
+      margin-bottom: 4px;
+    }
+
+    .activity-bar-timeline {
+      height: 6px;
+      background: linear-gradient(90deg, #003478 0%, #003478 100%);
+      border-radius: 3px;
+      position: relative;
+    }
+
+    .activity-bar:nth-child(2) .activity-bar-timeline { background: linear-gradient(90deg, #003478 0%, #003478 100%); }
+    .activity-bar:nth-child(3) .activity-bar-timeline { background: linear-gradient(90deg, #00a8cc 0%, #00a8cc 100%); }
+    .activity-bar:nth-child(4) .activity-bar-timeline { background: linear-gradient(90deg, #c4268b 0%, #c4268b 100%); }
+    .activity-bar:nth-child(5) .activity-bar-timeline { background: linear-gradient(90deg, #00a8cc 0%, #00a8cc 100%); }
+
+    .activity-bar-label-small {
+      font-size: 11px;
+      color: #999;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        width: 100%;
+        padding: 20px;
+      }
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <img src="data:image/jpeg;base64,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" alt="Logo Saint Victor Lycée" class="logo">
+    <div class="header-title">
+      <h1>Temps forts de l'orientation</h1>
+      <p>Classe de 2nde • Année scolaire 2026–2027</p>
+    </div>
+  </div>
+
+  <div class="timeline-months">
+    <div class="month-badge q1" data-month="october">Octobre</div>
+    <div class="month-badge q1" data-month="november">Novembre</div>
+    <div class="month-badge q2" data-month="december">Décembre</div>
+    <div class="month-badge q2" data-month="january">Janvier</div>
+    <div class="month-badge q2" data-month="february">Février</div>
+    <div class="month-badge q3" data-month="march">Mars</div>
+    <div class="month-badge q3" data-month="april">Avril</div>
+    <div class="month-badge q3" data-month="may">Mai</div>
+    <div class="month-badge q3" data-month="june">Juin</div>
+  </div>
+
+  <div class="trimester q1 active">
+    <div class="trimester-title">🔵 1er trimestre — Octobre à Décembre</div>
+
+    <div class="event-card q1 visible" data-month="october">
+      <div class="event-icon">🎓</div>
+      <div class="event-body">
+        <div class="event-title">Présentation du baccalauréat</div>
+        <div class="event-period">Octobre</div>
+        <div class="event-desc">Importance des spécialités et découverte des parcours post-bac.</div>
+      </div>
+    </div>
+
+    <div class="event-card q1 visible" data-month="november december">
+      <div class="event-icon">📝</div>
+      <div class="event-body">
+        <div class="event-title">Recensement des souhaits de spécialités</div>
+        <div class="event-period">Novembre–Décembre</div>
+        <div class="event-desc">Collecte et analyse des choix de spécialités des élèves.</div>
+      </div>
+    </div>
+
+    <div class="event-card q1 visible" data-month="december">
+      <div class="event-icon">✅</div>
+      <div class="event-body">
+        <div class="event-title">Conseil de classe du T1</div>
+        <div class="event-period">Décembre</div>
+        <div class="event-desc">Premiers avis, recommandations quant aux souhaits de spécialité.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trimester q2">
+    <div class="trimester-title">🔷 2e trimestre — Janvier à Mars</div>
+
+    <div class="event-card q2" data-month="january">
+      <div class="event-icon">🗺️</div>
+      <div class="event-body">
+        <div class="event-title">Carrefours des spécialités</div>
+        <div class="event-period">Janvier</div>
+        <div class="event-desc">Exploration détaillée de chaque spécialité avec les équipes pédagogiques.</div>
+      </div>
+    </div>
+
+    <div class="event-card q2" data-month="january">
+      <div class="event-icon">🎯</div>
+      <div class="event-body">
+        <div class="event-title">Forum Post-bac Drôme Ardèche</div>
+        <div class="event-period">08 janvier 2027</div>
+        <div class="event-desc">Présentation des débouchés et des formations post-bac.</div>
+      </div>
+    </div>
+
+    <div class="event-card q2" data-month="february march">
+      <div class="event-icon">🔬</div>
+      <div class="event-body">
+        <div class="event-title">Immersion en cours de spécialité</div>
+        <div class="event-period">Février–Mars</div>
+        <div class="event-desc"><span class="highlight">Optionnel, sur demande motivée</span> — Vivre les enseignements avant le choix définitif.</div>
+      </div>
+    </div>
+
+    <div class="event-card q2" data-month="february">
+      <div class="event-icon">💬</div>
+      <div class="event-body">
+        <div class="event-title">Concertations actives</div>
+        <div class="event-period">Février</div>
+        <div class="event-desc">Mise à jour des intentions de spécialité avec suivi pédagogique.</div>
+      </div>
+    </div>
+
+    <div class="event-card q2" data-month="february">
+      <div class="event-icon">📋</div>
+      <div class="event-body">
+        <div class="event-title">Formulation intentions de spécialité</div>
+        <div class="event-period">Février</div>
+        <div class="event-desc">Via les fiches Educonnect en ligne.</div>
+      </div>
+    </div>
+
+    <div class="event-card q2" data-month="march">
+      <div class="event-icon">✅</div>
+      <div class="event-body">
+        <div class="event-title">Conseil de classe du T2</div>
+        <div class="event-period">Début mars</div>
+        <div class="event-desc">Avis et réponse aux intentions d'orientation.</div>
+      </div>
+    </div>
+
+    <div class="event-card q2" data-month="march april">
+      <div class="event-icon">🏫</div>
+      <div class="event-body">
+        <div class="event-title">Présentations Écoles d'ingénieurs, Commerce, Santé</div>
+        <div class="event-period">Mars–Avril</div>
+        <div class="event-desc">Présentation des formations post-bac spécialisées.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trimester q3">
+    <div class="trimester-title">🔴 3e trimestre — Avril à Juin</div>
+
+    <div class="event-card q3" data-month="march april">
+      <div class="event-icon">🏫</div>
+      <div class="event-body">
+        <div class="event-title">Présentations Écoles d'ingénieurs, Commerce, Santé</div>
+        <div class="event-period">Mars–Avril</div>
+        <div class="event-desc">Présentation des formations post-bac spécialisées.</div>
+      </div>
+    </div>
+
+    <div class="event-card q3" data-month="may">
+      <div class="event-icon">📝</div>
+      <div class="event-body">
+        <div class="event-title">Formulation des vœux définitifs</div>
+        <div class="event-period">Mai</div>
+        <div class="event-desc">Confirmation des choix d'orientation avant l'été.</div>
+      </div>
+    </div>
+
+    <div class="event-card q3" data-month="june">
+      <div class="event-icon">✨</div>
+      <div class="event-body">
+        <div class="event-title">Conseil de classe</div>
+        <div class="event-period">Juin</div>
+        <div class="event-desc">Avis de passage en classe supérieure.</div>
+      </div>
+    </div>
+
+    <div class="event-card q3" data-month="june">
+      <div class="event-icon">💼</div>
+      <div class="event-body">
+        <div class="event-title">Stage obligatoire de seconde générale et technologique</div>
+        <div class="event-period">14–25 juin 2027</div>
+        <div class="event-desc">Immersion professionnelle obligatoire de deux semaines.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="continuous-activities">
+    <div class="continuous-activities-title">🔄 Activités continues — toute l'année</div>
+
+    <div class="activity-bar">
+      <div class="activity-icon">🎯</div>
+      <div class="activity-bar-content">
+        <div class="activity-bar-label">Les Mardi O'Coaching – MOC</div>
+        <div class="activity-bar-timeline"></div>
+        <div class="activity-bar-label-small">Entretien individuel avec M. Goupy — Sur inscription auprès de Mme Petrosian (Secrétariat)</div>
+      </div>
+    </div>
+
+    <div class="activity-bar">
+      <div class="activity-icon">🧭</div>
+      <div class="activity-bar-content">
+        <div class="activity-bar-label">Temps de la réflexion — AP Parcours 2 sens</div>
+        <div class="activity-bar-timeline"></div>
+        <div class="activity-bar-label-small">Avec Mme Veysseyre et Mme Goupy — Filières post-2nde, centres d'intérêts, gestion des émotions</div>
+      </div>
+    </div>
+
+    <div class="activity-bar">
+      <div class="activity-icon">📅</div>
+      <div class="activity-bar-content">
+        <div class="activity-bar-label">Salons, Forums, Immersions, Portes ouvertes</div>
+        <div class="activity-bar-timeline"></div>
+        <div class="activity-bar-label-small">Dates d'immersion, JPO, débouchés post-bac et ressources sur les passerelles</div>
+      </div>
+    </div>
+
+    <div class="activity-bar">
+      <div class="activity-icon">💻</div>
+      <div class="activity-bar-content">
+        <div class="activity-bar-label">Ressources numériques — Padlet de l'orientation</div>
+        <div class="activity-bar-timeline"></div>
+        <div class="activity-bar-label-small"><a onclick="window.open('https://padlet.com/Padlet_Orientation/orientation-saint-victor-valence-zcnbkfsr9e17j3kw', '_blank')" style="color: #00a8cc; cursor: pointer; text-decoration: underline;">padlet.com/Padlet_Orientation/orientation-saint-victor-valence</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const state = { selectedMonth: 'october' };
+  const trimesterMap = {
+    'october': 'q1',
+    'november': 'q1',
+    'december': 'q1',
+    'january': 'q2',
+    'february': 'q2',
+    'march': 'q2',
+    'april': 'q3',
+    'may': 'q3',
+    'june': 'q3'
+  };
+
+  function filterEvents(month) {
+    const selectedTrimester = trimesterMap[month];
+
+    // Show/hide trimester sections
+    document.querySelectorAll('.trimester').forEach(trimester => {
+      if (trimester.classList.contains(selectedTrimester)) {
+        trimester.classList.add('active');
+      } else {
+        trimester.classList.remove('active');
+      }
+    });
+
+    // Show events for selected month
+    const events = document.querySelectorAll('.event-card');
+    events.forEach(event => {
+      const months = event.dataset.month.split(' ');
+      if (months.includes(month)) {
+        event.classList.add('visible');
+      } else {
+        event.classList.remove('visible');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const badges = document.querySelectorAll('.month-badge');
+    
+    badges.forEach(badge => {
+      badge.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const month = this.dataset.month;
+        state.selectedMonth = month;
+
+        // Update badge styles
+        document.querySelectorAll('.month-badge').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        // Filter events
+        filterEvents(month);
+      });
+    });
+
+    // Initialize: mark first month as selected
+    const firstBadge = document.querySelector('.month-badge');
+    if (firstBadge) {
+      firstBadge.classList.add('active');
+    }
+  });
+})();
+</script>
+</body>
+</html>
