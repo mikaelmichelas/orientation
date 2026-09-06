@@ -43,7 +43,7 @@
         }
 
         .header svg {
-            height: 55px;
+            height: 105px;
             width: auto;
             flex-shrink: 0;
             object-fit: contain;
@@ -270,7 +270,7 @@
             }
 
             .header svg {
-                height: 68px;
+                height: 102px;
             }
 
             .content {
@@ -305,17 +305,18 @@
             </svg>
             <div class="header-text">
                 <h1>🎓 Jeudis de l'Orientation</h1>
-                <p>Saint Victor Lycée – Inscription aux présentations</p>
+                <p>Lycée Saint Victor – Inscription aux présentations</p>
             </div>
         </div>
-<div class="tabs">
-    <button class="tab active" data-date="08/10/2025">08 Oct</button>
-    <button class="tab" data-date="15/10/2025">15 Oct</button>
-    <button class="tab" data-date="05/11/2025">05 Nov</button>
-    <button class="tab" data-date="19/11/2025">19 Nov</button>
-    <button class="tab" data-date="26/11/2025">26 Nov</button>
-    <button class="tab" data-date="03/12/2025">03 Dec</button>
-</div>
+
+        <div class="tabs">
+            <button class="tab active" data-date="08/10/2025">08 Oct</button>
+            <button class="tab disabled" data-date="15/10/2025">15 Oct</button>
+            <button class="tab disabled" data-date="05/11/2025">05 Nov</button>
+            <button class="tab disabled" data-date="19/11/2025">19 Nov</button>
+            <button class="tab disabled" data-date="26/11/2025">26 Nov</button>
+            <button class="tab disabled" data-date="03/12/2025">03 Dec</button>
+        </div>
 
         <div class="content">
             <form id="jdoForm">
@@ -387,30 +388,7 @@
         const form = document.getElementById('jdoForm');
         const messageEl = document.getElementById('message');
         let currentDate = '08/10/2025';
-// Activer/désactiver les onglets selon la date actuelle
-function updateTabsStatus() {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
 
-    tabs.forEach(tab => {
-        const dateStr = tab.dataset.date; // format "DD/MM/YYYY"
-        const [day, month, year] = dateStr.split('/').map(Number);
-        const tabDate = new Date(year, month - 1, day);
-
-        // Calcul : onglet actif si (date - 7 jours) <= aujourd'hui
-        const openDate = new Date(tabDate);
-        openDate.setDate(openDate.getDate() - 7);
-
-        if (openDate <= today) {
-            tab.classList.remove('disabled');
-        } else {
-            tab.classList.add('disabled');
-        }
-    });
-}
-
-// Appeler au chargement
-updateTabsStatus();
         // Gestion des onglets
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
