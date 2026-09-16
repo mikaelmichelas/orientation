@@ -177,6 +177,108 @@
   .card-tale .card-top  { background: #c4268b; }
   .card-tale .card-cta  { background: #c4268b; }
 
+  /* TREMPLINS BANNER */
+  .tremplins-section {
+    width: 100%;
+    max-width: 1060px;
+    padding: 0 24px 60px;
+  }
+  .tremplins-card {
+    border-radius: 18px;
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.14);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    cursor: pointer;
+  }
+  .tremplins-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.22);
+  }
+  .tremplins-top {
+    background: linear-gradient(135deg, #e84c0d 0%, #d4006e 35%, #7b00cc 65%, #0077cc 100%);
+    border-radius: 18px 18px 0 0;
+    padding: 32px 36px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .tremplins-title-block {}
+  .tremplins-label {
+    font-family: 'Sora', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 6px;
+  }
+  .tremplins-name {
+    font-family: 'Sora', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+  }
+  .tremplins-name span {
+    font-weight: 400;
+    font-size: 20px;
+    opacity: 0.85;
+  }
+  .tremplins-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .t-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: 'Sora', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    backdrop-filter: blur(4px);
+  }
+  .tremplins-body {
+    background: white;
+    border-radius: 0 0 18px 18px;
+    padding: 22px 36px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .tremplins-desc {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+    flex: 1;
+    min-width: 220px;
+  }
+  .tremplins-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #d4006e, #7b00cc);
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
   /* FOOTER */
   .footer {
     width: 100%;
@@ -248,6 +350,28 @@
     </div>
   </a>
 
+</div>
+
+<div class="tremplins-section">
+  <a href="https://mikaelmichelas.github.io/tremplins/index.html" target="_blank" class="tremplins-card">
+    <div class="tremplins-top">
+      <div class="tremplins-title-block">
+        <div class="tremplins-label">Dispositifs phares · Saint Victor</div>
+        <div class="tremplins-name">Tremplins <span>Sup</span></div>
+      </div>
+      <div class="tremplins-badges">
+        <a href="<!-- insère ici le lien pdf Tremplin INGE -->" target="_blank" class="t-badge">🎓 Tremplin INGE</a>
+        <a href="<!-- insère ici le lien pdf Prépa PASS -->" target="_blank" class="t-badge">🩺 Prépa PASS</a>
+        <a href="<!-- insère ici le lien pdf Tremplin PEPS -->" target="_blank" class="t-badge">💡 Tremplin PEPS</a>
+        <a href="<!-- insère ici le lien pdf Déclic Sciences PO -->" target="_blank" class="t-badge">✨ Déclic Sciences PO</a>
+        <a href="<!-- insère ici le lien pdf Éloquence -->" target="_blank" class="t-badge">🎤 Éloquence</a>
+      </div>
+    </div>
+    <div class="tremplins-body">
+      <p class="tremplins-desc">Des parcours de préparation intensive aux grandes filières du supérieur — de 24 à 60 heures de formation, dès la 1ère. Écoles d'ingénieurs, médecine, Sciences Po, économie, prise de parole : chaque dispositif accompagne un projet concret.</p>
+      <span class="tremplins-cta">Inscription →</span>
+    </div>
+  </a>
 </div>
 
 <footer class="footer">
