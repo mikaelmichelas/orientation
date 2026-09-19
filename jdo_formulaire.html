@@ -259,6 +259,144 @@
             color: #003478;
         }
 
+        .pdf-button-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        .pdf-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF4757 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+        }
+
+        .pdf-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.4);
+        }
+
+        .pdf-button svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeInModal 0.3s ease;
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideInModal 0.3s ease;
+        }
+
+        @keyframes slideInModal {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF4757 100%);
+            color: white;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s ease;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .pdf-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: #f5f5f5;
+            color: #666;
+            font-size: 14px;
+        }
+
         @media (max-width: 600px) {
             .header {
                 flex-direction: column;
@@ -288,6 +426,16 @@
             .tab {
                 font-size: 12px;
                 padding: 12px 8px;
+            }
+
+            .modal-content {
+                width: 95%;
+                max-height: 95vh;
+            }
+
+            .pdf-button {
+                font-size: 13px;
+                padding: 10px 18px;
             }
         }
     </style>
@@ -697,7 +845,7 @@ AABQX0AEAqA2p1SoAWggrH/XwwUMAADACxCBAKiNsPKts86wWMhfj+MGAADADygRAwAAAACQQFAi
 BgAAAAAggUAEAgAAAAAkEIhAAAAAAIAEAhEIAAAAAJBAIAIBAAAAABIIRCAAAAAAQAKBCAQAAAAA
 SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style="height: 80px; width: auto; flex-shrink: 0; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
             <div class="header-text">
-                <h1>🎓 Jeudis de l'Orientation</h1>
+                <h1>🚀 Jeudis de l'Orientation</h1>
                 <p>Lycée Saint Victor – Inscription aux présentations</p>
             </div>
         </div>
@@ -712,6 +860,15 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
         </div>
 
         <div class="content">
+            <div class="pdf-button-container">
+                <button type="button" class="pdf-button" id="pdfButton">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M7,13A1,1 0 0,1 8,12H10A2,2 0 0,1 12,14C12,15.11 11.29,16.05 10.3,16.35C10.92,16.68 11.5,17.26 11.5,18A1.5,1.5 0 0,1 10,19.5H8A1,1 0 0,1 7,18.5V13M8,14V15H10A1,1 0 0,1 11,14A1,1 0 0,1 10,13H8V14M8,17V18.5H10A0.5,0.5 0 0,1 10.5,18A0.5,0.5 0 0,1 10,17.5H8V17Z"/>
+                    </svg>
+                    Voir le programme JDO
+                </button>
+            </div>
+
             <form id="jdoForm">
                 <div class="info-box">
                     📍 Veuillez sélectionner 2 présentations différentes pour cette session
@@ -776,11 +933,65 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
         </div>
     </div>
 
+    <!-- Modal pour afficher le PDF -->
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📄 Programme Jeudis de l'Orientation</h2>
+                <button type="button" class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="pdf-loading">Chargement du PDF...</div>
+                <iframe id="pdfViewer" class="pdf-viewer" src="2026-2027-programme-jdo.pdf" style="display: none;"></iframe>
+            </div>
+        </div>
+    </div>
+
     <script>
         const tabs = document.querySelectorAll('.tab');
         const form = document.getElementById('jdoForm');
         const messageEl = document.getElementById('message');
         let currentDate = '08/10/2025';
+
+        // Gestion de la modale PDF
+        const pdfButton = document.getElementById('pdfButton');
+        const pdfModal = document.getElementById('pdfModal');
+        const closeModal = document.getElementById('closeModal');
+        const pdfViewer = document.getElementById('pdfViewer');
+        const pdfLoading = pdfModal.querySelector('.pdf-loading');
+
+        pdfButton.addEventListener('click', () => {
+            pdfModal.classList.add('show');
+            // Afficher l'iframe après un court délai pour laisser le temps de charger
+            setTimeout(() => {
+                pdfLoading.style.display = 'none';
+                pdfViewer.style.display = 'block';
+            }, 1000);
+        });
+
+        closeModal.addEventListener('click', () => {
+            pdfModal.classList.remove('show');
+            pdfViewer.style.display = 'none';
+            pdfLoading.style.display = 'flex';
+        });
+
+        // Fermer la modale en cliquant en dehors
+        pdfModal.addEventListener('click', (e) => {
+            if (e.target === pdfModal) {
+                pdfModal.classList.remove('show');
+                pdfViewer.style.display = 'none';
+                pdfLoading.style.display = 'flex';
+            }
+        });
+
+        // Fermer avec la touche Échap
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && pdfModal.classList.contains('show')) {
+                pdfModal.classList.remove('show');
+                pdfViewer.style.display = 'none';
+                pdfLoading.style.display = 'flex';
+            }
+        });
 
         // Gestion des onglets
         tabs.forEach(tab => {
