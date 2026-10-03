@@ -851,8 +851,8 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
         </div>
 
         <div class="tabs">
-            <button class="tab active" data-date="08/10/2025">08 Oct</button>
-            <button class="tab disabled" data-date="15/10/2025">15 Oct</button>
+            <button class="tab active" data-date="08/10/2025" data-close="2026-10-08T17:00:00+02:00">08 Oct</button>
+            <button class="tab" data-date="15/10/2025">15 Oct</button>
             <button class="tab disabled" data-date="05/11/2025">05 Nov</button>
             <button class="tab disabled" data-date="19/11/2025">19 Nov</button>
             <button class="tab disabled" data-date="26/11/2025">26 Nov</button>
@@ -900,12 +900,6 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
                         <label for="presentation1">1er choix *</label>
                         <select id="presentation1" name="presentation1" required>
                             <option value="">-- Sélectionner --</option>
-                            <option value="Master de Droit + Prepa ISP pour le concours de l'ENM - Salle C101">Master de Droit + Prepa ISP pour le concours de l'ENM - Salle C101</option>
-                            <option value="CPGE PCSI C. Vernet - Salle C107">CPGE PCSI C. Vernet - Salle C107</option>
-                            <option value="PASS Lyon & Pharmacie Montpellier - Salle C106">PASS Lyon & Pharmacie Montpellier - Salle C106</option>
-                            <option value="CPGE ECG Notre Dame des Minimes Lyon - Salle C201">CPGE ECG Notre Dame des Minimes Lyon - Salle C201</option>
-                            <option value="Licence Psychologie - Réorientation / service civique - Salle C206">Licence Psychologie - Réorientation / service civique - Salle C206</option>
-                            <option value="ISTP, alliance avec les écoles d’ingénieurs Mines St Étienne et Arts et Métiers - Salle C207">ISTP, alliance avec les écoles d’ingénieurs Mines St Étienne et Arts et Métiers - Salle C207</option>
                         </select>
                     </div>
 
@@ -913,12 +907,6 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
                         <label for="presentation2">2nd choix *</label>
                         <select id="presentation2" name="presentation2" required>
                             <option value="">-- Sélectionner --</option>
-                               <option value="Master de Droit + Prepa ISP pour le concours de l'ENM - Salle C101">Master de Droit + Prepa ISP pour le concours de l'ENM - Salle C101</option>
-                            <option value="CPGE PCSI C. Vernet - Salle C107">CPGE PCSI C. Vernet - Salle C107</option>
-                            <option value="PASS Lyon & Pharmacie Montpellier - Salle C106">PASS Lyon & Pharmacie Montpellier - Salle C106</option>
-                            <option value="CPGE ECG Notre Dame des Minimes Lyon - Salle C201">CPGE ECG Notre Dame des Minimes Lyon - Salle C201</option>
-                            <option value="Licence Psychologie - Réorientation / service civique - Salle C206">Licence Psychologie - Réorientation / service civique - Salle C206</option>
-                            <option value="ISTP, alliance avec les écoles d’ingénieurs Mines St Étienne et Arts et Métiers - Salle C207">ISTP, alliance avec les écoles d’ingénieurs Mines St Étienne et Arts et Métiers - Salle C207</option>
                         </select>
                     </div>
                 </div>
@@ -952,6 +940,68 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
         const form = document.getElementById('jdoForm');
         const messageEl = document.getElementById('message');
         let currentDate = '08/10/2025';
+
+        // ============================================================
+        // CONFIGURATION PAR DATE : modifier ici les intervenants
+        // Une liste par date. Les clés doivent correspondre aux data-date des onglets.
+        // ============================================================
+        const PRESENTATIONS = {
+          '08/10/2025': [
+            "Master de Droit + Prepa ISP pour le concours de l'ENM - Salle C101",
+            "CPGE PCSI C. Vernet - Salle C107",
+            "PASS Lyon & Pharmacie Montpellier - Salle C106",
+            "CPGE ECG Notre Dame des Minimes Lyon - Salle C201",
+            "Licence Psychologie - Réorientation / service civique - Salle C206",
+            "ISTP, alliance avec les écoles d’ingénieurs Mines St Étienne et Arts et Métiers - Salle C207"
+        ],
+          // 15 OCT : liste copiée du 08 Oct, à remplacer par les intervenants du 15
+          '15/10/2025': [
+            "Master de Droit + Prepa ISP pour le concours de l'ENM - Salle C101",
+            "CPGE PCSI C. Vernet - Salle C107",
+            "PASS Lyon & Pharmacie Montpellier - Salle C106",
+            "CPGE ECG Notre Dame des Minimes Lyon - Salle C201",
+            "Licence Psychologie - Réorientation / service civique - Salle C206",
+            "ISTP, alliance avec les écoles d’ingénieurs Mines St Étienne et Arts et Métiers - Salle C207"
+        ]
+        };
+
+        // Fermeture automatique : un onglet avec data-close est désactivé après cette heure
+        function isClosed(tab) {
+            const c = tab.dataset.close;
+            return c ? Date.now() >= new Date(c).getTime() : false;
+        }
+
+        function fillSelects(date) {
+            const list = PRESENTATIONS[date] || [];
+            ['presentation1', 'presentation2'].forEach(id => {
+                const sel = document.getElementById(id);
+                sel.innerHTML = '<option value="">-- Sélectionner --</option>';
+                list.forEach(p => {
+                    const o = document.createElement('option');
+                    o.value = p;
+                    o.textContent = p;
+                    sel.appendChild(o);
+                });
+            });
+        }
+
+        function refreshTabs(force) {
+            const before = currentDate;
+            tabs.forEach(t => {
+                if (isClosed(t)) {
+                    t.classList.add('disabled');
+                    t.classList.remove('active');
+                }
+            });
+            if (!document.querySelector('.tab.active')) {
+                const next = [...tabs].find(t => !t.classList.contains('disabled'));
+                if (next) { next.classList.add('active'); currentDate = next.dataset.date; }
+            }
+            if (force || currentDate !== before) {
+                form.reset();
+                fillSelects(currentDate);
+            }
+        }
 
         // Gestion de la modale PDF
         const pdfButton = document.getElementById('pdfButton');
@@ -1001,6 +1051,7 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
                     tab.classList.add('active');
                     currentDate = tab.dataset.date;
                     form.reset();
+                    fillSelects(currentDate);
                     messageEl.style.display = 'none';
                 }
             });
@@ -1015,6 +1066,14 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
             const classe = document.getElementById('classe').value;
             const pres1 = document.getElementById('presentation1').value;
             const pres2 = document.getElementById('presentation2').value;
+
+            // Session fermée (ex. 08 Oct après 17h00)
+            const activeTab = document.querySelector('.tab.active');
+            if (activeTab && isClosed(activeTab)) {
+                refreshTabs();
+                showMessage('Les inscriptions pour cette session sont closes.', 'error');
+                return;
+            }
 
             // Validation : pas deux fois la même présentation
             if (pres1 === pres2) {
@@ -1055,6 +1114,9 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
             messageEl.className = `message ${type}`;
             messageEl.style.display = 'block';
         }
+
+        refreshTabs(true);
+        setInterval(refreshTabs, 60000);
 
         // Pour tester sans Google Sheets, afficher les données en console
         console.log('📝 JDO Formulaire prêt. Pour connecter Google Sheets, remplacer YOUR_GOOGLE_APPS_SCRIPT_URL_HERE');
