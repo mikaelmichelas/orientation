@@ -318,9 +318,10 @@
         .modal-content {
             background: white;
             border-radius: 12px;
-            width: 90%;
-            max-width: 900px;
-            max-height: 90vh;
+            width: 96%;
+            max-width: 1400px;
+            height: 92vh;
+            max-height: 92vh;
             display: flex;
             flex-direction: column;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
@@ -376,8 +377,18 @@
 
         .modal-body {
             flex: 1;
+            min-height: 0;
             overflow: hidden;
             display: flex;
+        }
+
+        .modal-newtab {
+            color: white;
+            font-size: 14px;
+            text-decoration: underline;
+            margin-left: auto;
+            margin-right: 16px;
+            white-space: nowrap;
         }
 
         .pdf-viewer {
@@ -429,7 +440,8 @@
             }
 
             .modal-content {
-                width: 95%;
+                width: 98%;
+                height: 95vh;
                 max-height: 95vh;
             }
 
@@ -926,6 +938,7 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
         <div class="modal-content">
             <div class="modal-header">
                 <h2>📄 Programme Jeudis de l'Orientation</h2>
+                <a class="modal-newtab" href="2026-2027-programme-jdo.pdf" target="_blank" rel="noopener">Ouvrir en plein écran ↗</a>
                 <button type="button" class="modal-close" id="closeModal">&times;</button>
             </div>
             <div class="modal-body">
