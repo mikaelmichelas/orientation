@@ -259,155 +259,6 @@
             color: #003478;
         }
 
-        .pdf-button-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 32px;
-        }
-
-        .pdf-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #FF6B6B 0%, #FF4757 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
-        }
-
-        .pdf-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.4);
-        }
-
-        .pdf-button svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            animation: fadeInModal 0.3s ease;
-        }
-
-        @keyframes fadeInModal {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 12px;
-            width: 96%;
-            max-width: 1400px;
-            height: 92vh;
-            max-height: 92vh;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideInModal 0.3s ease;
-        }
-
-        @keyframes slideInModal {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid #e0e0e0;
-            background: linear-gradient(135deg, #FF6B6B 0%, #FF4757 100%);
-            color: white;
-            border-radius: 12px 12px 0 0;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: white;
-            transition: transform 0.3s ease;
-            padding: 0;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-close:hover {
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            flex: 1;
-            min-height: 0;
-            overflow: hidden;
-            display: flex;
-        }
-
-        .modal-newtab {
-            color: white;
-            font-size: 14px;
-            text-decoration: underline;
-            margin-left: auto;
-            margin-right: 16px;
-            white-space: nowrap;
-        }
-
-        .pdf-viewer {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .pdf-loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            background: #f5f5f5;
-            color: #666;
-            font-size: 14px;
-        }
-
         @media (max-width: 600px) {
             .header {
                 flex-direction: column;
@@ -437,17 +288,6 @@
             .tab {
                 font-size: 12px;
                 padding: 12px 8px;
-            }
-
-            .modal-content {
-                width: 98%;
-                height: 95vh;
-                max-height: 95vh;
-            }
-
-            .pdf-button {
-                font-size: 13px;
-                padding: 10px 18px;
             }
         }
     </style>
@@ -857,33 +697,24 @@ AABQX0AEAqA2p1SoAWggrH/XwwUMAADACxCBAKiNsPKts86wWMhfj+MGAADADygRAwAAAACQQFAi
 BgAAAAAggUAEAgAAAAAkEIhAAAAAAIAEAhEIAAAAAJBAIAIBAAAAABIIRCAAAAAAQAKBCAQAAAAA
 SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style="height: 80px; width: auto; flex-shrink: 0; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));">
             <div class="header-text">
-                <h1>🚀 Jeudis de l'Orientation</h1>
+                <h1>🎓 Jeudis de l'Orientation</h1>
                 <p>Lycée Saint Victor – Inscription aux présentations</p>
             </div>
         </div>
 
         <div class="tabs">
-            <button class="tab disabled" data-date="08/10/2026" data-close="2026-10-08T17:00:00+02:00">08 Oct</button>
+            <button class="tab disabled" data-date="08/10/2026">08 Oct</button>
             <button class="tab disabled" data-date="15/10/2026">15 Oct</button>
-            <button class="tab" data-date="05/11/2026">05 Nov</button>
+            <button class="tab active" data-date="05/11/2026">05 Nov</button>
             <button class="tab disabled" data-date="19/11/2026">19 Nov</button>
             <button class="tab disabled" data-date="26/11/2026">26 Nov</button>
             <button class="tab disabled" data-date="03/12/2026">03 Dec</button>
         </div>
 
         <div class="content">
-            <div class="pdf-button-container">
-                <button type="button" class="pdf-button" id="pdfButton">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M7,13A1,1 0 0,1 8,12H10A2,2 0 0,1 12,14C12,15.11 11.29,16.05 10.3,16.35C10.92,16.68 11.5,17.26 11.5,18A1.5,1.5 0 0,1 10,19.5H8A1,1 0 0,1 7,18.5V13M8,14V15H10A1,1 0 0,1 11,14A1,1 0 0,1 10,13H8V14M8,17V18.5H10A0.5,0.5 0 0,1 10.5,18A0.5,0.5 0 0,1 10,17.5H8V17Z"/>
-                    </svg>
-                    Voir le programme JDO
-                </button>
-            </div>
-
             <form id="jdoForm">
                 <div class="info-box">
-                    📍 Veuillez sélectionner 2 présentations différentes pour cette session TEST
+                    📍 Veuillez sélectionner 2 présentations différentes pour cette session
                 </div>
 
                 <div class="form-group">
@@ -912,6 +743,12 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
                         <label for="presentation1">1er choix *</label>
                         <select id="presentation1" name="presentation1" required>
                             <option value="">-- Sélectionner --</option>
+                            <option value="Master de Droit + Prepa ISP pour le concours de l'ENM - Salle C101">Master de Droit + Prepa ISP pour le concours de l'ENM - Salle C101</option>
+                            <option value="CPGE PCSI C. Vernet - Salle C107">CPGE PCSI C. Vernet - Salle C107</option>
+                            <option value="PASS Lyon & Pharmacie Montpellier - Salle C106">PASS Lyon & Pharmacie Montpellier - Salle C106</option>
+                            <option value="Présentation 4 - Salle C201">Présentation 4 - Salle C201</option>
+                            <option value="Présentation 5 - Salle C206">Présentation 5 - Salle C206</option>
+                            <option value="Présentation 6 - Salle C207">Présentation 6 - Salle C207</option>
                         </select>
                     </div>
 
@@ -919,6 +756,12 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
                         <label for="presentation2">2nd choix *</label>
                         <select id="presentation2" name="presentation2" required>
                             <option value="">-- Sélectionner --</option>
+                            <option value="Master de Droit + Prepa ISP pour le concours de l'ENM - Salle C101">Master de Droit + Prepa ISP pour le concours de l'ENM - Salle C101</option>
+                            <option value="CPGE PCSI C. Vernet - Salle C107">CPGE PCSI C. Vernet - Salle C107</option>
+                            <option value="PASS Lyon & Pharmacie Montpellier - Salle C106">PASS Lyon & Pharmacie Montpellier - Salle C106</option>
+                            <option value="Présentation 4 - Salle C201">Présentation 4 - Salle C201</option>
+                            <option value="Présentation 5 - Salle C206">Présentation 5 - Salle C206</option>
+                            <option value="Présentation 6 - Salle C207">Présentation 6 - Salle C207</option>
                         </select>
                     </div>
                 </div>
@@ -933,151 +776,79 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
         </div>
     </div>
 
-    <!-- Modal pour afficher le PDF -->
-    <div id="pdfModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>📄 Programme Jeudis de l'Orientation</h2>
-                <a class="modal-newtab" href="2026-2027-programme-jdo.pdf" target="_blank" rel="noopener">Ouvrir en plein écran ↗</a>
-                <button type="button" class="modal-close" id="closeModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="pdf-loading">Chargement du PDF...</div>
-                <iframe id="pdfViewer" class="pdf-viewer" src="2026-2027-programme-jdo.pdf" style="display: none;"></iframe>
-            </div>
-        </div>
-    </div>
-
     <script>
+        // Données des présentations par date
+        const PRESENTATIONS = {
+            '08/10/2026': [
+                "Master de Droit + Prepa ISP pour le concours de l'ENM - Salle C101",
+                "CPGE PCSI C. Vernet - Salle C107",
+                "PASS Lyon & Pharmacie Montpellier - Salle C106"
+            ],
+            '15/10/2026': [
+                "CPGE BCPST - Salle C101",
+                "Licence Informatique & Master Data Science - Salle C107",
+                "BTS Électrotechnique - Salle C106"
+            ],
+            '05/11/2026': [
+                "SupBiotech, école d'ingénieurs en biotechnologie / Bachelor possible - Lyon / Paris",
+                "ESDAC, école d'art et design - Lyon",
+                "Pôle Santé de Montplaisir - BTS Prothèse orthèse, DST imagerie médicale, radiologue",
+                "ISEG, école en communication, marketing et digital - Lyon",
+                "Licence de Droit, Prépa IEP, DU World Foreign Policy d'UCLY",
+                "EPITA, école ingénieur en informatique - Lyon (IA, cybersécurité, robotique, etc.)"
+            ],
+            '19/11/2026': [],
+            '26/11/2026': [],
+            '03/12/2026': []
+        };
+
         const tabs = document.querySelectorAll('.tab');
         const form = document.getElementById('jdoForm');
         const messageEl = document.getElementById('message');
-        let currentDate = '08/10/2026';
+        let currentDate = '05/11/2026';
 
-        // ============================================================
-        // CONFIGURATION PAR DATE : modifier ici les intervenants
-        // Une liste par date. Les clés doivent correspondre aux data-date des onglets.
-        // ============================================================
-        const PRESENTATIONS = {
-          '08/10/2026': [
-            "Master de Droit + Prepa ISP pour le concours de l'ENM - Salle C102",
-            "CPGE PCSI C. Vernet - Salle C103",
-            "PASS Lyon & Pharmacie Montpellier - Salle C104",
-            "CPGE ECG Notre Dame des Minimes Lyon - Salle C105",
-            "Licence Psychologie - Réorientation / service civique - Salle C106",
-            "ISTP, alliance avec les écoles d’ingénieurs Mines St Étienne et Arts et Métiers - Salle C107"
-        ],
-          // 15 OCT : liste copiée du 08 Oct, à remplacer par les intervenants du 15
-          '15/10/2026': [
-            
-            "Etudes de santé, licences PASS & LAS - Avicenne Lyon ",
-            "CPGE MPSI, école Centrale / CPGE ECG",
-            "ESTBB, école d’Ingénieurs en Biotechnologies Lyon",
-            "BTSA analyses biologiques, biotechnologiques",
-              "DNMADE animation 2D/3D - métiers de la communication plurimédia et du cinéma"
-        ],
-            // 05 NOV : liste copiée du 15 Oct, à remplacer par les intervenants du 05
-          '05/11/2026': [
-            
-            "SupBiotech, école d'ingénieurs en biotechnologie / Bachelor possible - Lyon / Paris ",
-            "ESDAC, école d'art et design - Lyon ",
-            "Pôle Santé de Montplaisir - BTS Prothèse orthèse, DST imagerie médicale, radiologue",
-            "ISEG, école en communication, marketing et digital - Lyon",
-            "Licence de Droit, Prépa IEP, DU World Foreign Policy d'UCLY ",
-            "EPITA, école ingénieur en informatique - Lyon (IA, cybersécurité, robotique, etc... "
-        };
-
-        // Fermeture automatique : un onglet avec data-close est désactivé après cette heure
-        function isClosed(tab) {
-            const c = tab.dataset.close;
-            return c ? Date.now() >= new Date(c).getTime() : false;
-        }
-
+        // Fonction pour remplir les dropdowns
         function fillSelects(date) {
-            const list = PRESENTATIONS[date] || [];
-            ['presentation1', 'presentation2'].forEach(id => {
-                const sel = document.getElementById(id);
-                sel.innerHTML = '<option value="">-- Sélectionner --</option>';
-                list.forEach(p => {
-                    const o = document.createElement('option');
-                    o.value = p;
-                    o.textContent = p;
-                    sel.appendChild(o);
-                });
+            const presentations = PRESENTATIONS[date] || [];
+            const select1 = document.getElementById('presentation1');
+            const select2 = document.getElementById('presentation2');
+
+            // Garder la première option (--Sélectionner --)
+            while (select1.options.length > 1) {
+                select1.remove(1);
+            }
+            while (select2.options.length > 1) {
+                select2.remove(1);
+            }
+
+            // Ajouter les présentations
+            presentations.forEach(pres => {
+                const opt1 = document.createElement('option');
+                opt1.value = pres;
+                opt1.textContent = pres;
+                select1.appendChild(opt1);
+
+                const opt2 = document.createElement('option');
+                opt2.value = pres;
+                opt2.textContent = pres;
+                select2.appendChild(opt2);
             });
         }
-
-        function refreshTabs(force) {
-            const before = currentDate;
-            tabs.forEach(t => {
-                if (isClosed(t)) {
-                    t.classList.add('disabled');
-                    t.classList.remove('active');
-                }
-            });
-            if (!document.querySelector('.tab.active')) {
-                const next = [...tabs].find(t => !t.classList.contains('disabled'));
-                if (next) { next.classList.add('active'); currentDate = next.dataset.date; }
-            }
-            if (force || currentDate !== before) {
-                form.reset();
-                fillSelects(currentDate);
-            }
-        }
-
-        // Gestion de la modale PDF
-        const pdfButton = document.getElementById('pdfButton');
-        const pdfModal = document.getElementById('pdfModal');
-        const closeModal = document.getElementById('closeModal');
-        const pdfViewer = document.getElementById('pdfViewer');
-        const pdfLoading = pdfModal.querySelector('.pdf-loading');
-
-        pdfButton.addEventListener('click', () => {
-            pdfModal.classList.add('show');
-            // Afficher l'iframe après un court délai pour laisser le temps de charger
-            setTimeout(() => {
-                pdfLoading.style.display = 'none';
-                pdfViewer.style.display = 'block';
-            }, 1000);
-        });
-
-        closeModal.addEventListener('click', () => {
-            pdfModal.classList.remove('show');
-            pdfViewer.style.display = 'none';
-            pdfLoading.style.display = 'flex';
-        });
-
-        // Fermer la modale en cliquant en dehors
-        pdfModal.addEventListener('click', (e) => {
-            if (e.target === pdfModal) {
-                pdfModal.classList.remove('show');
-                pdfViewer.style.display = 'none';
-                pdfLoading.style.display = 'flex';
-            }
-        });
-
-        // Fermer avec la touche Échap
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && pdfModal.classList.contains('show')) {
-                pdfModal.classList.remove('show');
-                pdfViewer.style.display = 'none';
-                pdfLoading.style.display = 'flex';
-            }
-        });
 
         // Gestion des onglets
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                if (!tab.classList.contains('disabled')) {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    currentDate = tab.dataset.date;
-                    form.reset();
-                    fillSelects(currentDate);
-                    messageEl.style.display = 'none';
-                }
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentDate = tab.dataset.date;
+                fillSelects(currentDate);
+                form.reset();
+                messageEl.style.display = 'none';
             });
         });
+
+        // Initialiser les présentations au chargement
+        fillSelects(currentDate);
 
         // Soumission du formulaire
         form.addEventListener('submit', async (e) => {
@@ -1088,14 +859,6 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
             const classe = document.getElementById('classe').value;
             const pres1 = document.getElementById('presentation1').value;
             const pres2 = document.getElementById('presentation2').value;
-
-            // Session fermée (ex. 08 Oct après 17h00)
-            const activeTab = document.querySelector('.tab.active');
-            if (activeTab && isClosed(activeTab)) {
-                refreshTabs();
-                showMessage('Les inscriptions pour cette session sont closes.', 'error');
-                return;
-            }
 
             // Validation : pas deux fois la même présentation
             if (pres1 === pres2) {
@@ -1136,9 +899,6 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
             messageEl.className = `message ${type}`;
             messageEl.style.display = 'block';
         }
-
-        refreshTabs(true);
-        setInterval(refreshTabs, 60000);
 
         // Pour tester sans Google Sheets, afficher les données en console
         console.log('📝 JDO Formulaire prêt. Pour connecter Google Sheets, remplacer YOUR_GOOGLE_APPS_SCRIPT_URL_HERE');
