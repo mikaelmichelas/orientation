@@ -863,12 +863,12 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
         </div>
 
         <div class="tabs">
-            <button class="tab disabled" data-date="08/10/2025" data-close="2026-10-08T17:00:00+02:00">08 Oct</button>
-            <button class="tab" data-date="15/10/2025">15 Oct</button>
-            <button class="tab disabled" data-date="05/11/2025">05 Nov</button>
-            <button class="tab disabled" data-date="19/11/2025">19 Nov</button>
-            <button class="tab disabled" data-date="26/11/2025">26 Nov</button>
-            <button class="tab disabled" data-date="03/12/2025">03 Dec</button>
+            <button class="tab disabled" data-date="08/10/2026" data-close="2026-10-08T17:00:00+02:00">08 Oct</button>
+            <button class="tab disabled" data-date="15/10/2026">15 Oct</button>
+            <button class="tab" data-date="05/11/2026">05 Nov</button>
+            <button class="tab disabled" data-date="19/11/2026">19 Nov</button>
+            <button class="tab disabled" data-date="26/11/2026">26 Nov</button>
+            <button class="tab disabled" data-date="03/12/2026">03 Dec</button>
         </div>
 
         <div class="content">
@@ -952,14 +952,14 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
         const tabs = document.querySelectorAll('.tab');
         const form = document.getElementById('jdoForm');
         const messageEl = document.getElementById('message');
-        let currentDate = '08/10/2025';
+        let currentDate = '08/10/2026';
 
         // ============================================================
         // CONFIGURATION PAR DATE : modifier ici les intervenants
         // Une liste par date. Les clés doivent correspondre aux data-date des onglets.
         // ============================================================
         const PRESENTATIONS = {
-          '08/10/2025': [
+          '08/10/2026': [
             "Master de Droit + Prepa ISP pour le concours de l'ENM - Salle C102",
             "CPGE PCSI C. Vernet - Salle C103",
             "PASS Lyon & Pharmacie Montpellier - Salle C104",
@@ -968,14 +968,23 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
             "ISTP, alliance avec les écoles d’ingénieurs Mines St Étienne et Arts et Métiers - Salle C107"
         ],
           // 15 OCT : liste copiée du 08 Oct, à remplacer par les intervenants du 15
-          '15/10/2025': [
+          '15/10/2026': [
             
             "Etudes de santé, licences PASS & LAS - Avicenne Lyon ",
             "CPGE MPSI, école Centrale / CPGE ECG",
             "ESTBB, école d’Ingénieurs en Biotechnologies Lyon",
             "BTSA analyses biologiques, biotechnologiques",
               "DNMADE animation 2D/3D - métiers de la communication plurimédia et du cinéma"
-        ]
+        ],
+            // 05 NOV : liste copiée du 15 Oct, à remplacer par les intervenants du 05
+          '05/11/2026': [
+            
+            "SupBiotech, école d'ingénieurs en biotechnologie / Bachelor possible - Lyon / Paris ",
+            "ESDAC, école d'art et design - Lyon ",
+            "Pôle Santé de Montplaisir - BTS Prothèse orthèse, DST imagerie médicale, radiologue",
+            "ISEG, école en communication, marketing et digital - Lyon",
+              "Licence de Droit, Prépa IEP, DU World Foreign Policy d'UCLY "
+              "EPITA, école ingénieur en informatique - Lyon (IA, cybersécurité, robotique, etc... "
         };
 
         // Fermeture automatique : un onglet avec data-close est désactivé après cette heure
