@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Licence portail santé 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Charte Saint Victor : bleu #003478, magenta #c4268b, cyan #00a8cc. Colonne unique, un bandeau logo + degrade en tete, une couleur par bloc (sante bleu, discipline magenta, transversal cyan) */
+:root {
+  --bg: #f3f6fb;
+  --surface: #ffffff;
+  --ink: #0f1b2d;
+  --muted: #55627a;
+  --line: #dde3ec;
+  --navy: #003478;
+  --magenta: #c4268b;
+  --cyan: #00a8cc;
+  --accent: #003478;
+  --accent-soft: #e4ecf8;
+  --disc: #c4268b;
+  --disc-soft: #fbe6f3;
+  --trans: #0086a6;
+  --trans-soft: #e0f4f9;
+  --warn: #a94f00;
+  --warn-soft: #fff1e0;
+  --ok: #15803d;
+  --ok-soft: #e3f5ea;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1220; --surface: #131d33; --ink: #e8edf5; --muted: #9aa8bd; --line: #26344b;
+    --accent: #7aa7ff; --accent-soft: #14264a; --disc: #f07ac4; --disc-soft: #3a1630;
+    --trans: #3cc8e6; --trans-soft: #0f3340; --warn: #f0a444; --warn-soft: #3a2810;
+    --ok: #5fd08a; --ok-soft: #12311f; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1220; --surface: #131d33; --ink: #e8edf5; --muted: #9aa8bd; --line: #26344b;
+  --accent: #7aa7ff; --accent-soft: #14264a; --disc: #f07ac4; --disc-soft: #3a1630;
+  --trans: #3cc8e6; --trans-soft: #0f3340; --warn: #f0a444; --warn-soft: #3a2810;
+  --ok: #5fd08a; --ok-soft: #12311f; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 1.0625rem/1.55 var(--font-body);
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 64px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.02em; color: var(--accent); }
+h2 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
+h3 { font-size: 1.1rem; font-weight: 700; }
+p { margin: 0 0 12px; max-width: 68ch; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+
+.brand { display: flex; align-items: stretch; margin-top: 24px; border-radius: 12px; overflow: hidden; border-bottom: 4px solid var(--magenta); }
+.header-logo { background: #fff; padding: 10px 18px; display: flex; align-items: center; flex: none; }
+.header-logo img { height: 56px; width: auto; display: block; }
+.header-logo .wordmark { font: 700 1.05rem/1.1 var(--font-display); color: #003478; }
+.header-gradient { flex: 1; background: linear-gradient(to right, #ffffff 0%, #003478 45%); color: #fff; display: flex; align-items: center; padding: 14px 20px 14px 64px; font: 600 .95rem/1.3 var(--font-body); min-width: 0; }
+@media (max-width: 720px) { .header-gradient { padding-left: 36px; font-size: .88rem; } .header-logo img { height: 44px; } }
+header.hero { padding: 0 0 24px; border-bottom: 1px solid var(--line); }
+.stamp { display: block; font-size: .85rem; font-weight: 600; color: var(--muted); margin-bottom: 14px; }
+.hero p.lead { font-size: 1.2rem; margin-top: 14px; color: var(--muted); }
+
+section { padding-top: 40px; }
+.lede { color: var(--muted); }
+
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+.fact { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+.fact b { display: block; font: 700 2rem/1 var(--font-display); color: var(--accent); font-variant-numeric: tabular-nums; margin-bottom: 6px; }
+.fact span { font-size: .95rem; color: var(--muted); line-height: 1.35; display: block; }
+
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: .98rem; }
+th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+thead th { font-family: var(--font-display); font-size: .95rem; background: var(--bg); }
+th.new, td.new { background: var(--accent-soft); }
+th[scope=row] { font-weight: 600; width: 22%; }
+
+.presets { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 12px; }
+.presets button {
+  font: 600 .95rem var(--font-body); color: var(--ink); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer;
+}
+.presets button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.bar { display: flex; height: 64px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+.seg { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0; color: #fff; min-width: 0; transition: flex-basis .35s ease; font-variant-numeric: tabular-nums; }
+.seg b { font: 700 1.2rem/1.1 var(--font-display); }
+.seg small { font-size: .82rem; opacity: .92; }
+.seg.sante { background: var(--accent); }
+.seg.disc { background: var(--disc); }
+.seg.trans { background: var(--trans); }
+:root[data-theme="dark"] .seg, :root:not([data-theme="light"]) .seg { color: #0d1521; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .seg { color: #fff; } }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 10px 0 0; font-size: .92rem; color: var(--muted); }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+.blocs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+.bloc { background: var(--surface); border: 1px solid var(--line); border-top-width: 4px; border-radius: 10px; padding: 14px 16px; }
+.bloc.sante { border-top-color: var(--accent); }
+.bloc.disc { border-top-color: var(--disc); }
+.bloc.trans { border-top-color: var(--trans); }
+.bloc .range { font-size: .9rem; color: var(--muted); font-variant-numeric: tabular-nums; margin: 2px 0 8px; }
+.bloc p { font-size: .98rem; margin: 0; }
+.note { font-size: .92rem; color: var(--muted); margin-top: 12px; }
+
+.steps { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 12px; }
+.step { display: grid; grid-template-columns: 40px 1fr; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+.num { width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font: 700 1.1rem var(--font-display); }
+:root[data-theme="dark"] .num { color: #0d1521; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .num { color: #0d1521; } }
+.step p { margin: 4px 0 0; font-size: 1rem; }
+.fork { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.branch { border-radius: 8px; padding: 12px 14px; font-size: .97rem; }
+.branch.yes { background: var(--ok-soft); }
+.branch.no { background: var(--warn-soft); }
+.branch strong { display: block; margin-bottom: 2px; }
+
+.rank { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+.rank > div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+.rank .tag { display: inline-block; font-size: .8rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); margin-bottom: 8px; }
+.rank p { font-size: .98rem; margin: 6px 0 0; }
+
+.callout { background: var(--warn-soft); border-left: 5px solid var(--warn); border-radius: 8px; padding: 16px 18px; margin-top: 16px; }
+.callout strong { color: var(--warn); }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.col { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+.col h3 { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.pill { font: 700 .78rem var(--font-body); padding: 2px 10px; border-radius: 999px; }
+.pill.ok { background: var(--ok-soft); color: var(--ok); }
+.pill.wait { background: var(--warn-soft); color: var(--warn); }
+.col ul { margin: 0; padding-left: 20px; }
+.col li { margin-bottom: 8px; font-size: 1rem; }
+
+.check { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; }
+.check label { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; cursor: pointer; }
+.check input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--accent); flex: none; }
+.check input:checked + span { color: var(--muted); text-decoration: line-through; }
+
+.sources ul { padding-left: 20px; }
+.sources li { margin-bottom: 6px; }
+footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); font-size: .9rem; color: var(--muted); }
+
+@media (max-width: 720px) {
+  .facts { grid-template-columns: 1fr 1fr; }
+  .blocs, .rank, .two, .fork { grid-template-columns: 1fr; }
+  .wrap { padding: 0 16px 48px; }
+}
+@media (prefers-reduced-motion: reduce) { .seg { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="brand">
+    <div class="header-logo"><img src="logo.png" alt="Lycée Saint Victor" onerror="this.outerHTML='&lt;span class=&quot;wordmark&quot;&gt;Lycée<br>Saint Victor&lt;/span&gt;'"></div>
+    <div class="header-gradient">Orientation · Terminales 2027</div>
+  </div>
+  <span class="stamp" style="margin-top:24px">Mis à jour le 13 novembre 2026</span>
+  <h1>Études de santé : la licence portail santé arrive en 2027</h1>
+  <p class="lead">Si vous passez le bac en 2027 et visez médecine, pharmacie, odontologie ou maïeutique, le PASS et la LAS n'existent plus. Une seule voie les remplace : la LPS.</p>
+  <div class="facts" role="list">
+    <div class="fact" role="listitem"><b>1</b><span>vœu sur Parcoursup, avec une discipline au choix</span></div>
+    <div class="fact" role="listitem"><b>2</b><span>chances d'entrer en santé : fin de L1 et fin de L2</span></div>
+    <div class="fact" role="listitem"><b>60</b><span>ECTS en première année, répartis en 3 blocs</span></div>
+    <div class="fact" role="listitem"><b>1 sur 4</b><span>étudiants réussit aujourd'hui, selon le ministère</span></div>
+  </div>
+</header>
+
+<section id="avant-apres">
+  <h2>Ce qui change</h2>
+  <p class="lede">La réforme est fixée par le décret n° 2026-988 du 23 octobre 2026. Elle ne rend pas l'accès plus facile : elle le rend plus lisible.</p>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr><th></th><th>PASS<br><small>jusqu'au bac 2026</small></th><th>LAS<br><small>jusqu'au bac 2026</small></th><th class="new">LPS<br><small>dès le bac 2027</small></th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Principe</th><td>Année centrée sur la santé, avec une mineure dans une autre discipline</td><td>Licence classique avec une option santé</td><td class="new">60 ECTS en 3 blocs : santé, discipline, transversal</td></tr>
+        <tr><th scope="row">Parcoursup</th><td>Un vœu PASS ou un vœu LAS</td><td>Un vœu PASS ou un vœu LAS</td><td class="new">Un seul vœu LPS, avec sous-vœux par discipline</td></tr>
+        <tr><th scope="row">Candidatures en santé</th><td>Une, année non redoublable</td><td>Selon les règles de l'université</td><td class="new">Deux : fin de L1 et fin de L2</td></tr>
+        <tr><th scope="row">Règles</th><td>Variables d'une université à l'autre</td><td>Variables d'une université à l'autre</td><td class="new">Cadre national commun</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="blocs">
+  <h2>La première année en trois blocs</h2>
+  <p class="lede">Santé et discipline pèsent presque autant. Chaque université règle le poids exact dans des fourchettes fixées par le décret. Choisissez un exemple pour voir la répartition.</p>
+  <div class="presets" role="group" aria-label="Exemples de répartition">
+    <button type="button" data-s="24" data-d="30" data-t="6" aria-pressed="true">Exemple présenté à la JELU</button>
+    <button type="button" data-s="30" data-d="24" data-t="6" aria-pressed="false">Santé au maximum</button>
+    <button type="button" data-s="24" data-d="24" data-t="12" aria-pressed="false">Transversal au maximum</button>
+  </div>
+  <div class="bar" id="bar" role="img" aria-label="Répartition des 60 ECTS">
+    <div class="seg sante" id="seg-s"><b>24</b></div>
+    <div class="seg disc" id="seg-d"><b>30</b></div>
+    <div class="seg trans" id="seg-t"><b>6</b></div>
+  </div>
+  <p class="legend"><span><i class="dot" style="background:var(--accent)"></i>Santé</span><span><i class="dot" style="background:var(--disc)"></i>Discipline</span><span><i class="dot" style="background:var(--trans)"></i>Transversal</span><span>Total : 60 ECTS</span></p>
+  <div class="blocs">
+    <div class="bloc sante"><h3>Santé</h3><div class="range">24 à 30 ECTS</div><p>Connaissances scientifiques communes aux filières de santé. Liste des matières fixée par arrêté.</p></div>
+    <div class="bloc disc"><h3>Discipline</h3><div class="range">24 à 30 ECTS</div><p>Une licence à choisir : sciences, droit, psychologie, STAPS... ou soins infirmiers. C'est votre licence de repli.</p></div>
+    <div class="bloc trans"><h3>Transversal</h3><div class="range">6 à 12 ECTS</div><p>Méthodologie, compétences psychosociales, communication, éthique, numérique.</p></div>
+  </div>
+  <p class="note">Un ECTS est une unité de crédit européenne. Un semestre validé en donne 30, une année 60. Le minimum du bloc santé est de 24 ECTS.</p>
+</section>
+
+<section id="parcours">
+  <h2>Votre parcours, étape par étape</h2>
+  <ol class="steps">
+    <li class="step"><span class="num" aria-hidden="true">1</span><div><h3>Terminale : le vœu</h3><p>Vous formulez un vœu « licence portail santé » sur Parcoursup à partir de janvier 2027, puis vous précisez la discipline dans un sous-vœu.</p></div></li>
+    <li class="step"><span class="num" aria-hidden="true">2</span><div><h3>L1 : première candidature</h3><p>Pour être classé, il faut valider le bloc santé et le bloc disciplinaire, sans compensation entre eux. Une excellente note en santé ne rattrape pas un bloc discipline raté.</p>
+      <div class="fork">
+        <div class="branch yes"><strong>Classé et admis</strong>Vous entrez en deuxième année de médecine, pharmacie, odontologie ou maïeutique.</div>
+        <div class="branch no"><strong>Validé mais pas admis</strong>Vous passez en L2 de votre discipline, avec vos crédits.</div>
+      </div>
+      <div class="fork">
+        <div class="branch no"><strong>L1 non validée, seuil d'ECTS atteint</strong>Vous redoublez dans la même mention. Une seule candidature reste possible, à la fin de la L2.</div>
+        <div class="branch no"><strong>L1 non validée, sous le seuil</strong>Le redoublement se fait hors LPS (autre licence ou réorientation). Plus de seconde candidature.</div>
+      </div>
+    </div></li>
+    <li class="step"><span class="num" aria-hidden="true">3</span><div><h3>L2 : seconde candidature</h3><p>Mêmes prérequis, plus 60 ECTS validés en L2 dans la même mention. D'après la JELU, les places sont partagées entre candidats de L1 et de L2, avec au moins 20 % pour la L2 et au plus 80 % pour la L1.</p></div></li>
+  </ol>
+</section>
+
+<section id="classement">
+  <h2>Comment le classement fonctionne</h2>
+  <p class="lede">Présenté lors de la JELU de Valence, le 12 novembre 2026.</p>
+  <div class="rank">
+    <div><span class="tag">Condition</span><h3>Valider les deux blocs</h3><p>Santé et discipline, sans compensation. Sans cela, vous n'êtes pas classé.</p></div>
+    <div><span class="tag">Étape 1</span><h3>Classement par mention</h3><p>Les étudiants sont classés par tranches au sein de chaque mention, sur les trois blocs.</p></div>
+    <div><span class="tag">Étape 2</span><h3>Interclassement</h3><p>Les mentions sont comparées entre tranches de même niveau uniquement, sur les notes du bloc santé.</p></div>
+  </div>
+  <div class="callout">
+    <strong>À retenir de la JELU.</strong> La grande majorité des étudiants n'ira pas en deuxième année de santé. Pensez à votre plan B avant de choisir votre sous-vœu, et choisissez une discipline que vous accepteriez de poursuivre trois ans.
+  </div>
+</section>
+
+<section id="inconnu">
+  <h2>Ce qui est acté, ce qui reste ouvert</h2>
+  <div class="two">
+    <div class="col">
+      <h3><span class="pill ok">Acté</span> par le décret</h3>
+      <ul>
+        <li>Fin du PASS et de la LAS à la rentrée 2027</li>
+        <li>Blocs santé, discipline et transversal</li>
+        <li>Deux candidatures en santé</li>
+        <li>Soins infirmiers possibles comme discipline</li>
+        <li>Passerelles élargies pour les titulaires d'une licence</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3><span class="pill wait">En attente</span> d'arrêtés</h3>
+      <ul>
+        <li><strong>Date.</strong> Les doyens de santé ont demandé un report à 2028.</li>
+        <li><strong>Places.</strong> Les doyens de médecine réclament 20 % de places en moins en 2027.</li>
+        <li><strong>Licences proposées</strong> par chaque université, et seuil de redoublement.</li>
+        <li><strong>Kinésithérapie.</strong> Hors décret : le texte n'est pas prêt. À Grenoble, 20 à 25 places sur 90 passeraient par la LPS, les autres voies ne changent pas (JELU).</li>
+        <li><strong>Moyens.</strong> 5 millions d'euros annoncés, contre 30 millions estimés nécessaires par France Universités.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="faire">
+  <h2>Ce que vous pouvez faire dès maintenant</h2>
+  <ul class="check" id="check">
+    <li><label><input type="checkbox" id="c1"><span>Choisir une discipline qui vous plaît vraiment : elle compte autant que la santé et reste votre licence si vous n'entrez pas en santé.</span></label></li>
+    <li><label><input type="checkbox" id="c2"><span>Soigner vos résultats de terminale : la sélection reste forte et les places limitées.</span></label></li>
+    <li><label><input type="checkbox" id="c3"><span>Consulter les fiches Parcoursup des universités qui vous intéressent dès leur parution : disciplines, poids des blocs, évaluation.</span></label></li>
+    <li><label><input type="checkbox" id="c4"><span>Écarter les rumeurs et les anciens chiffres PASS/LAS. Vérifier avec les sources ci-dessous.</span></label></li>
+    <li><label><input type="checkbox" id="c5"><span>Préparer un second projet, en santé ou non, qui vous plaise.</span></label></li>
+  </ul>
+  <p class="note">Une question personnelle ? Voyez votre professeur principal, le psychologue de l'Éducation nationale ou la direction.</p>
+</section>
+
+<section id="sources" class="sources">
+  <h2>Sources</h2>
+  <ul>
+    <li>Notes prises à la JELU de Valence, 12 novembre 2026 : organisation, classement, seconde candidature, kinésithérapie à Grenoble.</li>
+    <li><a href="https://www.service-public.gouv.fr/particuliers/actualites/A18890">Service-Public, Réforme : licence portail santé</a> (décret n° 2026-988 du 23 octobre 2026).</li>
+    <li><a href="https://www.letudiant.fr/etudes/medecine-sante/etudes-de-sante-la-licence-portail-sante-remplacera-les-pass-las-a-la-rentree-2027.html">L'Étudiant, contenu du décret</a> : seuils, kinésithérapie, calendrier.</li>
+    <li><a href="https://www.letudiant.fr/etudes/medecine-sante/etudes-de-sante-vers-20-de-places-en-moins-en-lps-a-la-rentree-2027.html">L'Étudiant, doyens et réduction des places</a> (4 novembre 2026).</li>
+  </ul>
+</section>
+
+<footer>Document d'information élaboré par la direction du lycée Saint Victor, Valence. Les règles de détail peuvent encore évoluer.</footer>
+
+</div>
+<script>
+(function () {
+  var buttons = document.querySelectorAll('.presets button');
+  var segs = { s: document.getElementById('seg-s'), d: document.getElementById('seg-d'), t: document.getElementById('seg-t') };
+  function show(s, d, t) {
+    [['s', s], ['d', d], ['t', t]].forEach(function (p) {
+      var el = segs[p[0]];
+      el.style.flexBasis = (p[1] / 60 * 100) + '%';
+      el.style.flexGrow = 0; el.style.flexShrink = 0;
+      el.querySelector('b').textContent = p[1];
+    });
+    document.getElementById('bar').setAttribute('aria-label', 'Santé ' + s + ', discipline ' + d + ', transversal ' + t + ' ECTS sur 60');
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      buttons.forEach(function (o) { o.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', 'true');
+      show(+b.dataset.s, +b.dataset.d, +b.dataset.t);
+    });
+  });
+  show(24, 30, 6);
+
+  var boxes = document.querySelectorAll('#check input');
+  boxes.forEach(function (box) {
+    try { if (localStorage.getItem('lps-' + box.id) === '1') box.checked = true; } catch (e) {}
+    box.addEventListener('change', function () {
+      try { localStorage.setItem('lps-' + box.id, box.checked ? '1' : '0'); } catch (e) {}
+    });
+  });
+})();
+</script>
+</body>
+</html>
