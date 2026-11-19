@@ -178,6 +178,26 @@ section { scroll-margin-top: 76px; }
 .callout { margin-top: 20px; background: rgba(255, 255, 255, .95); color: #1b2a47; border-left: 6px solid var(--magenta); border-radius: 14px; padding: 18px 22px; }
 .callout strong { color: #8d1a65; }
 
+.unis { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.uni { background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .2); border-radius: 20px; padding: 24px; }
+.uni h3 { margin-bottom: 4px; }
+.uni ol { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 14px; }
+.uni li { display: grid; grid-template-columns: 34px 1fr; gap: 14px; font-size: .98rem; color: rgba(255, 255, 255, .88); line-height: 1.5; }
+.uni li strong { color: #fff; }
+.uni .n { width: 34px; height: 34px; border-radius: 10px; background: rgba(255, 255, 255, .18); display: grid; place-items: center; font: 700 .95rem var(--font-display); color: #fff; }
+.callout.light { background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-left: 6px solid var(--magenta); }
+.callout.light strong { color: var(--disc); }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); box-shadow: var(--shadow); }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: .98rem; }
+th, td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.5; }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+thead th { font: 700 1rem var(--font-display); background: var(--accent-soft); color: var(--accent); }
+thead th small { font: 500 .8rem var(--font-body); color: var(--muted); }
+tbody th { font-weight: 700; width: 18%; }
+.nc { color: var(--muted); font-style: italic; }
+td ul { margin: 0; padding-left: 18px; }
+td li { margin-bottom: 8px; }
+
 /* Acquis / ouvert */
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .col ul { margin: 12px 0 0; padding-left: 20px; }
@@ -203,7 +223,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
 
 @media (max-width: 980px) {
   .hero .wrap { grid-template-columns: 1fr; }
-  .compare, .flow { grid-template-columns: 1fr; }
+  .compare, .flow, .unis { grid-template-columns: 1fr; }
   .card.new::before { display: none; }
   .stepcard + .stepcard::before { display: none; }
 }
@@ -226,6 +246,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
       <a href="#blocs">Les blocs</a>
       <a href="#parcours">Parcours</a>
       <a href="#classement">Classement</a>
+      <a href="#comparer">Grenoble et Lyon</a>
       <a href="#savoir">À savoir</a>
       <a href="#faire">À faire</a>
     </nav>
@@ -247,7 +268,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
   </div>
   <div class="wrap">
     <div>
-      <div><span class="eyebrow">Orientation · Terminales 2027 · mis à jour le 13 novembre 2026</span></div>
+      <div><span class="eyebrow">Orientation · Terminales 2027 · mis à jour le 19 novembre 2026</span></div>
       <h1>Études de santé&nbsp;: la <em>licence portail santé</em> arrive en 2027</h1>
       <p class="lead">Si vous passez le bac en 2027 et visez médecine, pharmacie, odontologie ou maïeutique, le PASS et la LAS n'existent plus. Une seule voie les remplace : la LPS.</p>
       <div class="cta">
@@ -256,7 +277,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
       </div>
     </div>
     <div class="facts" role="list">
-      <div class="fact" role="listitem"><b>1</b><span>vœu sur Parcoursup, avec une discipline au choix. Exemples : sciences, droit, lettres, maths...</span></div>
+      <div class="fact" role="listitem"><b>1</b><span>vœu sur Parcoursup, avec une discipline au choix. Exemples : sciences, droit, lettres, maths... La liste dépend de l'université.</span></div>
       <div class="fact" role="listitem"><b>2</b><span>chances d'entrer en santé : fin de L1 et fin de L2</span></div>
       <div class="fact" role="listitem"><b>60</b><span>ECTS en première année, répartis en 3 blocs</span></div>
       <div class="fact" role="listitem"><b>1 sur 4</b><span>étudiants réussit aujourd'hui, selon le ministère</span></div>
@@ -298,7 +319,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
           <div><dt>Principe</dt><dd>60 ECTS en 3 blocs : santé, discipline, transversal</dd></div>
           <div><dt>Parcoursup</dt><dd>Un seul vœu LPS, avec des sous-vœux par discipline</dd></div>
           <div><dt>Candidatures</dt><dd>Deux : à la fin de la L1 et à la fin de la L2</dd></div>
-          <div><dt>Règles</dt><dd>Un cadre national commun</dd></div>
+          <div><dt>Règles</dt><dd>Un cadre national, puis des réglages propres à chaque université</dd></div>
         </dl>
       </article>
     </div>
@@ -310,9 +331,10 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
     <h2>La première année en trois blocs</h2>
     <p class="lede">Santé et discipline pèsent presque autant. Chaque université règle le poids exact dans des fourchettes fixées par le décret. Choisissez un exemple pour voir la répartition.</p>
     <div class="presets" role="group" aria-label="Exemples de répartition">
-      <button type="button" data-s="24" data-d="30" data-t="6" aria-pressed="true">Cas de la faculté de Grenoble</button>
+      <button type="button" data-s="24" data-d="30" data-t="6" aria-pressed="true">Exemple de Grenoble (JELU)</button>
       <button type="button" data-s="30" data-d="24" data-t="6" aria-pressed="false">Santé au maximum</button>
       <button type="button" data-s="24" data-d="24" data-t="12" aria-pressed="false">Transversal au maximum</button>
+      <button type="button" data-s="27" data-d="27" data-t="6" aria-pressed="false">Lyon (45 / 45 / 10 %)</button>
     </div>
     <div class="bar" id="bar" role="img" aria-label="Répartition des 60 ECTS">
       <div class="seg sante" id="seg-s">24</div>
@@ -322,10 +344,10 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
     <p class="legend"><span><i class="dot" style="background:var(--accent)"></i>Santé</span><span><i class="dot" style="background:var(--disc)"></i>Discipline</span><span><i class="dot" style="background:var(--trans)"></i>Transversal</span><span>Total : 60 ECTS</span></p>
     <div class="blocs">
       <div class="bloc sante"><h3>Santé</h3><div class="range">24 à 30 ECTS</div><p>Connaissances scientifiques communes aux filières de santé. Liste des matières fixée par arrêté.</p></div>
-      <div class="bloc disc"><h3>Discipline</h3><div class="range">24 à 30 ECTS</div><p>Une licence à choisir : sciences, droit, psychologie, STAPS... ou soins infirmiers. C'est votre licence de repli.</p></div>
+      <div class="bloc disc"><h3>Discipline</h3><div class="range">24 à 30 ECTS</div><p>Une licence à choisir parmi celles de l'université (STAPS, maths, chimie, biologie...), ou les soins infirmiers. C'est votre licence de repli.</p></div>
       <div class="bloc trans"><h3>Transversal</h3><div class="range">6 à 12 ECTS</div><p>Méthodologie, compétences psychosociales, communication, éthique, numérique.</p></div>
     </div>
-    <p class="note">Un ECTS est une unité de crédit européenne. Un semestre validé en donne 30, une année 60. Le minimum du bloc santé est de 24 ECTS.</p>
+    <p class="note">Un ECTS est une unité de crédit européenne. Un semestre validé en donne 30, une année 60. Le minimum du bloc santé est de 24 ECTS. À Lyon, les pourcentages annoncés (45 %, 45 % et 10 %) correspondent à 27, 27 et 6 ECTS : c'est un calcul à confirmer.</p>
   </div>
 </section>
 
@@ -346,14 +368,14 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
         <div class="outcomes">
           <div class="out yes"><strong>Classé et admis</strong>Vous entrez en deuxième année de médecine, pharmacie, odontologie ou maïeutique.</div>
           <div class="out no"><strong>Validé mais pas admis</strong>Vous passez en L2 de votre discipline, avec vos crédits.</div>
-          <div class="out no"><strong>L1 non validée, seuil atteint</strong>Vous redoublez dans la même mention. Une seule candidature reste possible, à la fin de la L2.</div>
+          <div class="out no"><strong>L1 non validée, seuil atteint</strong>Vous redoublez dans la même mention. Une seule candidature reste possible, à la fin de la L2. Le seuil reste à fixer (supposé autour de 8 sur 20 à Lyon).</div>
           <div class="out no"><strong>L1 non validée, sous le seuil</strong>Le redoublement se fait hors LPS (autre licence ou réorientation). Plus de seconde candidature.</div>
         </div>
       </article>
       <article class="stepcard">
         <div class="badge">3</div>
         <h3>L2 : seconde candidature</h3>
-        <p>Mêmes prérequis, plus 60 ECTS validés en L2 dans la même mention. A Grenoble au moins 20 % des places pour la L2 et au plus 80 % pour la L1.</p>
+        <p>Mêmes prérequis, plus 60 ECTS validés en L2 dans la même mention. D'après la JELU, au moins 20 % des places pour la L2 et au plus 80 % pour la L1. À Lyon, la note du bloc santé de la L1 est conservée : la seconde tentative se joue surtout sur la licence.</p>
       </article>
     </div>
   </div>
@@ -361,16 +383,53 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
 
 <section id="classement" class="block band">
   <div class="wrap">
-    <span class="where">À Grenoble</span>
     <h2>Comment le classement fonctionne</h2>
-    <p class="lede">Présenté lors de la JELU de Valence, le 12 novembre 2026.</p>
-    <div class="rank">
-      <div><span class="tag">Condition</span><h3>Valider les deux blocs</h3><p>Santé et discipline, sans compensation. Sans cela, vous n'êtes pas classé.</p></div>
-      <div><span class="tag">Étape 1</span><h3>Classement par mention</h3><p>Les étudiants sont classés par tranches au sein de chaque mention, sur les trois blocs.</p></div>
-      <div><span class="tag">Étape 2</span><h3>Interclassement</h3><p>Les mentions sont comparées entre tranches de même niveau uniquement, sur les notes du bloc santé.</p></div>
+    <p class="lede">Même logique de départ, réglages différents. Grenoble : exposé à la JELU de Valence, le 12 novembre 2026. Lyon : annonces du doyen de la faculté, relayées par une étudiante en 5e année de médecine.</p>
+    <div class="unis">
+      <article class="uni">
+        <span class="where">Grenoble</span>
+        <h3>Notes de la JELU de Valence</h3>
+        <ol>
+          <li><span class="n">1</span><div><strong>Valider les deux blocs.</strong> Santé et discipline, sans compensation. Sans cela, vous n'êtes pas classé.</div></li>
+          <li><span class="n">2</span><div><strong>Classement par mention.</strong> Les étudiants sont classés par tranches au sein de chaque mention, sur les trois blocs.</div></li>
+          <li><span class="n">3</span><div><strong>Interclassement.</strong> Les mentions sont comparées entre tranches de même niveau uniquement, sur les notes du bloc santé.</div></li>
+        </ol>
+      </article>
+      <article class="uni">
+        <span class="where">Lyon</span>
+        <h3>Annonces du doyen</h3>
+        <ol>
+          <li><span class="n">1</span><div><strong>Note globale sur 20.</strong> Chaque étudiant est classé dans sa discipline, sur sa note globale : santé et discipline comptent à égalité. Le bloc transversal, sans note, doit simplement être validé.</div></li>
+          <li><span class="n">2</span><div><strong>Les 10 % meilleurs.</strong> On retient les 10 % meilleurs de chaque discipline. On ne sait pas encore si le classement se fait par tranches successives de 10 % ou si la première tranche couvre toutes les places.</div></li>
+          <li><span class="n">3</span><div><strong>Départage par la santé.</strong> Ces étudiants sont départagés sur la note du bloc santé, qui compte donc deux fois : dans la note globale, puis pour départager.</div></li>
+        </ol>
+      </article>
     </div>
     <div class="callout">
-      <strong>À retenir </strong> La grande majorité des étudiants n'ira pas en deuxième année de santé. Pensez à votre plan B avant de choisir votre sous-vœu, et choisissez une discipline que vous accepteriez de poursuivre trois ans.
+      <strong>À retenir de la JELU.</strong> La grande majorité des étudiants n'ira pas en deuxième année de santé. Pensez à votre plan B avant de choisir votre sous-vœu, et choisissez une discipline que vous accepteriez de poursuivre trois ans.
+    </div>
+  </div>
+</section>
+
+<section id="comparer" class="block">
+  <div class="wrap">
+    <h2>Grenoble et Lyon, côte à côte</h2>
+    <p class="lede">Le décret fixe le cadre. Chaque université règle ensuite les détails, et ses annonces ne sont pas toutes publiées. Les cases « non communiqué » montrent ce que nous ne savons pas encore.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th></th><th>Grenoble <small>(JELU)</small></th><th>Lyon <small>(doyen, via une étudiante)</small></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Poids des blocs</th><td>Discipline 30 ECTS, santé 24, transversal 6</td><td>Santé et discipline à égalité, environ 45 % chacune, transversal environ 10 %. Cela correspondrait à 27, 27 et 6 ECTS (déduit, à confirmer).</td></tr>
+          <tr><th scope="row">Bloc transversal</th><td>Classement « sur l'ensemble des 3 blocs »</td><td>Validé ou non validé, sans note, donc sans effet sur la note globale. Sa validation est obligatoire pour passer en deuxième année.</td></tr>
+          <tr><th scope="row">Disciplines proposées</th><td class="nc">Non communiqué</td><td>Six domaines : chimie, physique, maths, sciences de l'ingénieur, biologie (BG2S), STAPS. L'informatique est rattachée aux maths ou aux sciences de l'ingénieur.</td></tr>
+          <tr><th scope="row">Places</th><td>Kinésithérapie : 20 à 25 places sur une promotion de 90 passeraient par la LPS, les autres voies ne changent pas</td><td>2 200 places en première année sur Parcoursup, au lieu de 2 400 en PASS et LAS 1 cumulés : « plus sélectif »</td></tr>
+          <tr><th scope="row">Évaluations</th><td class="nc">Non communiqué</td><td>Bloc santé : contrôle final au S1 et au S2. Bloc de licence : officiellement au S2 seulement, mais le doyen a annoncé qu'ils essaieront de l'évaluer aux deux semestres.</td></tr>
+          <tr><th scope="row">Seconde candidature et redoublement</th><td>60 ECTS validés en L2 dans la même mention. Au moins 20 % de places pour la L2, au plus 80 % pour la L1. Redoublement dans la même mention si le seuil d'ECTS est atteint, sinon hors LPS, sans seconde candidature.</td><td><ul><li><strong>Année validée, pas admis :</strong> passage en L2 de la discipline, avec la note du bloc santé de la L1 conservée. La seconde tentative se joue surtout sur la note du bloc disciplinaire.</li><li><strong>Année non validée (moyenne sous 10), assez d'ECTS :</strong> redoublement de la L1, puis seconde et dernière tentative en L2. Seuil non connu, supposé autour de 8 sur 20.</li><li><strong>Année non validée, ECTS insuffisants :</strong> pas de seconde chance.</li></ul></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout light">
+      <strong>Pour choisir.</strong> Si vous hésitez entre deux universités, comparez les disciplines proposées, la part des meilleurs retenue avant le départage par la santé, le poids du bloc santé et le calendrier des évaluations. Un « 10 % » se calcule par discipline : dans une petite discipline, cela représente peu d'étudiants.
     </div>
   </div>
 </section>
@@ -394,9 +453,10 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
         <h3><span class="pill wait">En attente</span>d'arrêtés</h3>
         <ul>
           <li><strong>Date.</strong> Les doyens de santé ont demandé un report à 2028.</li>
-          <li><strong>Places.</strong> Les doyens de médecine réclament 20 % de places en moins en 2027.</li>
+          <li><strong>Places.</strong> Les doyens de médecine réclament 20 % de places en moins en 2027. Lyon annonce 2 200 places en première année sur Parcoursup, au lieu de 2 400 en PASS et LAS 1 cumulés.</li>
           <li><strong>Licences proposées</strong> par chaque université, et seuil de redoublement.</li>
-          <li><strong>Kinésithérapie.</strong> Hors décret : le texte n'est pas prêt. À Grenoble, 20 à 25 places sur 90 passeraient par la LPS, les autres voies ne changent pas.</li>
+          <li><strong>Règles locales.</strong> Poids des blocs, part des meilleurs retenue avant le départage, disciplines et dates d'évaluation varient d'une université à l'autre. À Lyon, on ne sait pas si le départage se fait par tranches successives de 10 % ou par une seule. Plusieurs annonces sont orales et pas encore publiées.</li>
+          <li><strong>Kinésithérapie.</strong> Hors décret : le texte n'est pas prêt. À Grenoble, 20 à 25 places sur 90 passeraient par la LPS, les autres voies ne changent pas (JELU).</li>
           <li><strong>Moyens.</strong> 5 millions d'euros annoncés, contre 30 millions estimés nécessaires par France Universités.</li>
         </ul>
       </div>
@@ -411,11 +471,11 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
     <ul class="check" id="check">
       <li><label><input type="checkbox" id="c1"><span>Choisir une discipline qui vous plaît vraiment : elle compte autant que la santé et reste votre licence si vous n'entrez pas en santé.</span></label></li>
       <li><label><input type="checkbox" id="c2"><span>Soigner vos résultats de terminale : la sélection reste forte et les places limitées.</span></label></li>
-      <li><label><input type="checkbox" id="c3"><span>Consulter les fiches Parcoursup des universités qui vous intéressent dès leur parution : disciplines, poids des blocs, évaluation.</span></label></li>
+      <li><label><input type="checkbox" id="c3"><span>Consulter les fiches Parcoursup des universités qui vous intéressent dès leur parution : disciplines, poids des blocs, évaluation. Les règles diffèrent d'une université à l'autre.</span></label></li>
       <li><label><input type="checkbox" id="c4"><span>Écarter les rumeurs et les anciens chiffres PASS/LAS. Vérifier avec les sources ci-dessous.</span></label></li>
       <li><label><input type="checkbox" id="c5"><span>Préparer un second projet, en santé ou non, qui vous plaise.</span></label></li>
     </ul>
-    <p class="note">Une question personnelle ? Voyez votre professeur principal ou référent.</p>
+    <p class="note">Une question personnelle ? Voyez votre professeur principal, le psychologue de l'Éducation nationale ou la direction.</p>
   </div>
 </section>
 
@@ -424,6 +484,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
     <h2>Sources</h2>
     <ul>
       <li>Notes prises à la JELU de Valence, 12 novembre 2026 : organisation, classement, seconde candidature, kinésithérapie à Grenoble.</li>
+      <li>Informations transmises par Clara, étudiante en 5e année de médecine (partenariat Avicenne, Lyon), d'après le doyen de la faculté de Lyon, relayées les 17 et 19 novembre 2026 : classement, places, disciplines, évaluations. Annonces orales, non publiées.</li>
       <li><a href="https://www.service-public.gouv.fr/particuliers/actualites/A18890">Service-Public, Réforme : licence portail santé</a> (décret n° 2026-988 du 23 octobre 2026).</li>
       <li><a href="https://www.letudiant.fr/etudes/medecine-sante/etudes-de-sante-la-licence-portail-sante-remplacera-les-pass-las-a-la-rentree-2027.html">L'Étudiant, contenu du décret</a> : seuils, kinésithérapie, calendrier.</li>
       <li><a href="https://www.letudiant.fr/etudes/medecine-sante/etudes-de-sante-vers-20-de-places-en-moins-en-lps-a-la-rentree-2027.html">L'Étudiant, doyens et réduction des places</a> (4 novembre 2026).</li>
@@ -436,7 +497,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
 <footer>
   <div class="wrap">
     <span>Document d'information élaboré par la direction du lycée Saint Victor, Valence.</span>
-    <span> Tous les détails de cette réforme ne sont pas encore connus. Nouveaux décrets à paraître.</span>
+    <span>Les règles de détail peuvent encore évoluer.</span>
   </div>
 </footer>
 
