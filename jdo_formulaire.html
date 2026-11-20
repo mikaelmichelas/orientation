@@ -706,8 +706,8 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
             <button class="tab disabled" data-date="08/10/2026">08 Oct</button>
             <button class="tab disabled" data-date="15/10/2026">15 Oct</button>
             <button class="tab disabled" data-date="05/11/2026">05 Nov</button>
-            <button class="tab active" data-date="19/11/2026">19 Nov</button>
-            <button class="tab disabled" data-date="26/11/2026">26 Nov</button>
+            <button class="tab disabled" data-date="19/11/2026">19 Nov</button>
+            <button class="tab active" data-date="26/11/2026">26 Nov</button>
             <button class="tab disabled" data-date="03/12/2026">03 Dec</button>
         </div>
 
@@ -802,19 +802,26 @@ SCAQgQAAAAAASYOI/j8hd1H7XVMVpQAAAABJRU5ErkJggg==" alt="Logo Saint Victor" style=
                 "La Prépa des INP - 1er créneau",
                 "Les voies d'accès aux écoles d'ingénieurs avec Mikael Michelas - 2ème créneau",
                 "EDHEC Lyon & EML",
-                "CEFAM, école de management internationale spécialisé en management, finance, conseil et marketing",
+                "Vatel Lyon, école Hôtelière de luxe",
                 "BTS au mastère, en gestion, commerce-marketing, social et droit. BTS CG, GPME, NDRC, MCO, ESF, SP3S, licences RH, CVM, AGAF, BUT Carrières Juridiques, mastère Développement Commercial",
                 "CPGE ECG Lycée Notre Dame des Minimes, Prépa Sciences Po, Prépa Horizon Droit (en // de la licence), Bachelor Management",
                 "Peu importe, choix par défaut dans tous les cas, choisissez pour moi 😅"
             ],
-            '26/11/2026': [],
+            '26/11/2026': [
+                "ESDES Lyon, école de commerce",
+                "CPGE BCPST Champollion",
+                "SUPINFO Lyon",
+                "BUT TC (GEA aussi)",
+                "ESAIP, école d'ingénieur",
+                "BUT Informatique"
+            ],
             '03/12/2026': []
         };
 
         const tabs = document.querySelectorAll('.tab');
         const form = document.getElementById('jdoForm');
         const messageEl = document.getElementById('message');
-        let currentDate = '19/11/2026';
+        let currentDate = '26/11/2026';
 
         // Fonction pour remplir les dropdowns
         function fillSelects(date) {
