@@ -81,8 +81,10 @@ section{padding:72px 0;scroll-margin-top:64px}
 .hero h1{font-size:clamp(2.4rem,5.6vw,4.4rem);font-weight:800;color:#fff}
 .hero h1 em{font-style:normal;background:linear-gradient(transparent 84%,var(--sun) 84%);padding-bottom:2px}
 .hero-band .lead{color:#eef5ff}
-.kw{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
-.kw li{padding:7px 15px;border-radius:999px;background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.55);font-weight:700;font-size:.98rem}
+.hero-body>div:first-child{container-type:inline-size}
+.kw{display:flex;flex-wrap:nowrap;justify-content:space-between;gap:.4em;margin:22px 0 0;padding:0 0 2px;list-style:none;font-size:max(10px,min(.98rem,1.7cqw));overflow-x:auto;scrollbar-width:none}
+.kw::-webkit-scrollbar{display:none}
+.kw li{flex:none;padding:.45em .85em;border-radius:999px;background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.55);font-weight:700;white-space:nowrap}
 .hero .fmt{margin-top:18px;font-size:.98rem;color:#dcecff}
 .jpo{justify-self:end;width:min(320px,100%);background:#003478;color:#fff;border-radius:30px 30px 30px 8px;padding:22px 26px 24px;box-shadow:0 14px 34px rgba(0,30,80,.35)}
 .jpo p{margin:0}
